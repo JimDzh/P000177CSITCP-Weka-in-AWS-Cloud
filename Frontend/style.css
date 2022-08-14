@@ -8,14 +8,22 @@
 /*    margin-right: 2em;*/
 /*    margin-left: 2em;*/
 /*}*/
+*{
+    margin:0px;
+    padding:0px;
+}
 
+.grid-container{
+    /*background-color: 2A92E5;*/
+    margin: 0;
+}
 .rmit-logo {
     height: 3em;
     vertical-align: middle;
     float: left;
     margin-right: 1em;
     margin-left: 2em;
-    margin-top: 0;
+    margin-top: 0.3em;
 }
 
 .weka-logo {
@@ -23,12 +31,25 @@
     vertical-align: middle;
     float: left;
     margin-right: 2em;
-    margin-top: 0;
+    margin-top: 0.3em;
 }
 
 nav {
-    background: aqua;
+    background: rgba(42, 146, 229, 1);
     margin-top: 0;
+    text-align: center;
+}
+
+.left-nav{
+
+}
+
+.right-nav{
+
+}
+
+ul{
+
 }
 
 body {
