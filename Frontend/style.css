@@ -1,13 +1,8 @@
 
-/*header img {*/
-/*    height: 3em;*/
-/*    !* aligns inline element with this one *!*/
-/*    vertical-align: middle;*/
-/*    !* img moved to the right of page *!*/
-/*    float: left;*/
-/*    margin-right: 2em;*/
-/*    margin-left: 2em;*/
-/*}*/
+*{
+    margin: 0;
+    padding: 0;
+}
 
 .rmit-logo {
     height: 3em;
@@ -15,34 +10,38 @@
     float: left;
     margin-right: 1em;
     margin-left: 2em;
-    margin-top: 0;
+    margin-top: 0.8em;
+    /*margin-bottom: 2em;*/
+    /*margin-bottom: 2em;*/
 }
 
 .weka-logo {
     height: 3em;
     vertical-align: middle;
     float: left;
-    margin-right: 2em;
-    margin-top: 0;
+    margin-right: 3em;
+    margin-top: 0.8em;
+    /*margin-bottom: 2em;*/
+    /*margin-bottom: 2em;*/
 }
 
-nav {
-    background: aqua;
-    margin-top: 0;
-}
 
-body {
-    margin: 0;
+.navbar {
+    background-color: rgba(42, 146, 229, 1);
+    padding-bottom: 2.5em;
 }
 
 nav li {
     display: inline-block;
+    margin-top: 0.8em;
+    /*margin-right: 3em;*/
+    /*margin-bottom: 1.5em;*/
     /*border: solid rgb(100, 0, 171);*/
     /* top & bottom, left & right paddings */
-    padding: 0.5em 1em;
+    /*padding: 0.5em 1em;*/
     /*background-color: rgb(237, 237, 237);*/
     /* top & bottom, left & right margins around elements */
-    margin: 0.8em 1em;
+    /*margin: 0.8em 1em;*/
     /* bottom and left shadows */
     /*box-shadow: grey -0.1em 0.1em;*/
     /*transition: 1 sec;*/
@@ -50,5 +49,6 @@ nav li {
 
 nav li a {
     text-decoration: none;
-    color: black;
+    color: rgb(255, 255, 255);
+    margin-right: 3em;
 }
