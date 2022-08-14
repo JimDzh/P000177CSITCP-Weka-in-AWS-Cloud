@@ -1,47 +1,45 @@
-
 *{
-    margin: 0;
-    padding: 0;
+    margin:0px;
+    padding:0px;
 }
 
+.grid-container{
+    /*background-color: 2A92E5;*/
+    margin: 0;
+}
 .rmit-logo {
     height: 3em;
     vertical-align: middle;
     float: left;
     margin-right: 1em;
     margin-left: 2em;
-    margin-top: 0.8em;
-    /*margin-bottom: 2em;*/
-    /*margin-bottom: 2em;*/
+    margin-top: 0.7em;
 }
 
 .weka-logo {
     height: 3em;
     vertical-align: middle;
     float: left;
-    margin-right: 3em;
-    margin-top: 0.8em;
-    /*margin-bottom: 2em;*/
-    /*margin-bottom: 2em;*/
+    /* margin-right: 2em; */
+    margin-top: 0.7em;
 }
 
-
-.navbar {
-    background-color: rgba(42, 146, 229, 1);
-    padding-bottom: 2.5em;
+nav {
+    background: rgba(42, 146, 229, 1);
+    /* box-shadow: -1em; */
+    margin-top: 0;
+    text-align: center;
 }
+
 
 nav li {
     display: inline-block;
-    margin-top: 0.8em;
-    /*margin-right: 3em;*/
-    /*margin-bottom: 1.5em;*/
     /*border: solid rgb(100, 0, 171);*/
     /* top & bottom, left & right paddings */
-    /*padding: 0.5em 1em;*/
+    padding: 0.5em 1em;
     /*background-color: rgb(237, 237, 237);*/
     /* top & bottom, left & right margins around elements */
-    /*margin: 0.8em 1em;*/
+    margin: 1.2em 1em;
     /* bottom and left shadows */
     /*box-shadow: grey -0.1em 0.1em;*/
     /*transition: 1 sec;*/
@@ -49,6 +47,10 @@ nav li {
 
 nav li a {
     text-decoration: none;
-    color: rgb(255, 255, 255);
-    margin-right: 3em;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav li a:hover {
+    color: white;
 }
