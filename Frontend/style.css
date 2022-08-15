@@ -1,10 +1,10 @@
 
-*{
-    margin:0px;
-    padding:0px;
+* {
+    margin: 0px;
+    padding: 0px;
 }
 
-.grid-container{
+.grid-container {
     margin: 0;
 }
 
@@ -34,9 +34,9 @@
 /*}*/
 
 .video {
-    overflow:hidden;
+    overflow: hidden;
     height: 350px;
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .video-content h1 {
@@ -87,7 +87,7 @@ nav {
     /* box-shadow: -1em; */
     margin-top: 0;
     text-align: left;
-    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .2);
 }
 
 nav li {
@@ -111,5 +111,61 @@ nav li a {
 }
 
 nav li a:hover {
-    color: rgb(211, 211, 211)
+    color: rgb(211, 211, 211);
 }
+
+/*Below is the css for upload file button*/
+
+/* From uiverse.io */
+.uploadFile {
+    --color: rgb(55, 41, 185);
+    font-family: inherit;
+    display: inline-block;
+    width: 8em;
+    height: 2.6em;
+    line-height: 2.5em;
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgb(55, 41, 185);
+    transition: color .5s;
+    z-index: 1;
+    font-size: 17px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: rgb(55, 41, 185);
+}
+
+.uploadFile:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: rgb(55, 41, 185);
+    height: 150px;
+    width: 200px;
+    border-radius: 50%;
+}
+
+.uploadFile:hover {
+    color: #fff;
+}
+
+.uploadFile:before {
+    top: 100%;
+    left: 100%;
+    transition: all .7s;
+}
+
+.uploadFile:hover:before {
+    top: -30px;
+    left: -30px;
+}
+
+.uploadFile:active:before {
+    background: rgb(55, 41, 185);
+    transition: background 0s;
+}
+
+
+
+

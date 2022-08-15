@@ -6,53 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEKA</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-<!--    <script src="index.js"></script>-->
+    <!--    <script src="index.js"></script>-->
 </head>
-<body>
-    <div class="grid-container">
 
-        <div class="left-nav">
-            <img class="rmit-logo" src="https://keypath.uk.com/sites/uk/files/styles/half_width_600w_/public/image/2020-07/Rmit-White.png?itok=hUXxaWnz" alt="RMIT's logo">
-            <img class="weka-logo" src="https://dashboard.snapcraft.io/site_media/appmedia/2021/10/weka.png" alt="WEKA's logo">
-        </div>
-        <div class="right-nav">
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="">Preprocess</a></li>
-                    <li><a href="">Classify</a></li>
-                    <li><a href="">Cluster</a></li>
-                    <li><a href="">Associate</a></li>
-                    <li><a href="">Select attributes</a></li>
-                    <li><a href="">Visualise</a></li>
-                    <li><a href="help.html">Help</a></li>
-                </ul>
-            </nav>
-            <section class="video-section">
-                <div class="video-content">
-                    <h1 id="text" style="font-size: 50px"></h1>
-                    <script src="app.js"></script>
-                </div>
-                <div class="video">
-                    <video autoplay muted loop id="myVideo">
-                        <source src="videos/weka_video.mp4"
-                                type="video/mp4">
-                        <!-- alt text -->
-                        The web browser cannot support mp4
-                    </video>
-                </div>
-            </section>
-            <br>
-            <br>
-            <br>
-            <br>
-            <section class="file-upload">
-                <h1>Start by uploading a database file</h1>
-            </section>
-        </div>
-        <footer>
-            <li><a href="about.html">About us</a></li>
-        </footer>
+<body>
+<div class="grid-container">
+
+    <div class="left-nav">
+        <img class="rmit-logo"
+             src="https://keypath.uk.com/sites/uk/files/styles/half_width_600w_/public/image/2020-07/Rmit-White.png?itok=hUXxaWnz"
+             alt="RMIT's logo">
+        <img class="weka-logo"
+             src="https://dashboard.snapcraft.io/site_media/appmedia/2021/10/weka.png"
+             alt="WEKA's logo">
     </div>
+    <div class="right-nav">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="">Preprocess</a></li>
+                <li><a href="">Classify</a></li>
+                <li><a href="">Cluster</a></li>
+                <li><a href="">Associate</a></li>
+                <li><a href="">Select attributes</a></li>
+                <li><a href="">Visualise</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+        </nav>
+        <section class="video-section">
+            <div class="video-content">
+                <h1 id="text" style="font-size: 50px"></h1>
+                <script src="app.js"></script>
+            </div>
+            <div class="video">
+                <video autoplay muted loop id="myVideo">
+                    <source src="videos/weka_video.mp4"
+                            type="video/mp4">
+                    <!-- alt text -->
+                    The web browser cannot support mp4
+                </video>
+            </div>
+        </section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <section class="file-upload">
+
+            <h1>Start by uploading a database file</h1>
+            <br>
+            <input id="upload-files" type="file" style="display: none;" accept=".arff,.arff.gz,.names,.data,.csv,.json,.json.gz,
+.libsvm,.m,.dat,.bsi,.xrff,.xrff.gz"/>
+            <label class="uploadFile" for="upload-files">Upload File</label>
+        </section>
+    </div>
+    <footer>
+        <li><a href="about.html">About us</a></li>
+    </footer>
+</div>
 </body>
 </html>
