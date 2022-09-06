@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/P000177CSITCP-Weka-in-AWS-Cloud.iml" filepath="$PROJECT_DIR$/.idea/P000177CSITCP-Weka-in-AWS-Cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/loadDataMicroservice/loadDataMicroservice.iml" filepath="$PROJECT_DIR$/Backend/loadDataMicroservice/loadDataMicroservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/weka/weka.iml" filepath="$PROJECT_DIR$/weka/weka.iml" />
+    </modules>
+  </component>
+</project>
