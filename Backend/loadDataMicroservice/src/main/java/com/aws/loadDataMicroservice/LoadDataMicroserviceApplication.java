@@ -6,15 +6,30 @@ import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import weka.core.converters.CSVLoader;
 
 @SpringBootApplication
 public class LoadDataMicroserviceApplication {
 
 	public static void main(String[] args) {
+
+		// CONVERTING CSV TO ARFF
+		CSVLoader loader = new CSVLoader();
 		try{
-			Instances dataset = new Instances(new BufferedReader(new FileReader("/Users/sreshtaa/Downloads/diabetes.arff")));
+			loader.setSource(new File("./Datasets/testCsv.csv"));
+			Instances data = loader.getDataSet();
+			ArffSaver saver = new ArffSaver();
+			saver.setInstances(data);
+			saver.setFile(new File("./Datasets/resultArff.arff"));
+			saver.writeBatch();
+		} catch (Exception e) {
+			System.out.println("ATTEMPT UNSUCCESSFUL");
+		}
+
+		// LOADING A DATASET
+		try{
+			Instances dataset = new Instances(new BufferedReader(new FileReader("./Datasets/testArff.arff")));
 			System.out.println(dataset.toSummaryString());
 		} catch (Exception e) {
 			System.out.println("ATTEMPT UNSUCCESSFUL");
