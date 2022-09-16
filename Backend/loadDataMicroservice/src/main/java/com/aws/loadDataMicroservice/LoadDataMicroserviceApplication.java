@@ -29,7 +29,7 @@ public class LoadDataMicroserviceApplication {
 
 		// LOADING A DATASET
 		try{
-			Instances dataset = new Instances(new BufferedReader(new FileReader("./Datasets/testArff.arff")));
+			Instances dataset = new Instances(new BufferedReader(new FileReader("./Datasets/resultArff.arff")));
 			System.out.println(dataset.toSummaryString());
 		} catch (Exception e) {
 			System.out.println("ATTEMPT UNSUCCESSFUL");
