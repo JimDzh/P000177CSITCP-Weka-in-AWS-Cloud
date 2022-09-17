@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEKA</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!--    <script src="index.js"></script>-->
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -55,9 +55,7 @@
 
             <h1>Start by uploading a database file</h1>
             <br>
-            <input id="upload-files" type="file" style="display: none;" accept=".arff,.arff.gz,.names,.data,.csv,.json,.json.gz,
-.libsvm,.m,.dat,.bsi,.xrff,.xrff.gz"/>
-            <label class="uploadFile" for="upload-files">Upload File</label>
+            <label class="uploadFile" onclick="popUp('uploadFilePop.html', 'example', 800, 800)">Upload File</label>
         </section>
     </div>
     <footer>

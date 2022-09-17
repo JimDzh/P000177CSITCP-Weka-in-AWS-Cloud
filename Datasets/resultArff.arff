@@ -1,0 +1,13 @@
+@relation sampleCsv
+
+@attribute Attribute1 {value1,value11,value111,value1111,value11111}
+@attribute Attribute2 {value2,value22,value222,value2222,value22222}
+@attribute Attribute3 {value3,value33,value333,value3333,value33333}
+@attribute Attribute4 {value4,value44,value444,value4444,value44444}
+
+@data
+value1,value2,value3,value4
+value11,value22,value33,value44
+value111,value222,value333,value444
+value1111,value2222,value3333,value4444
+value11111,value22222,value33333,value44444
