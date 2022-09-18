@@ -1,5 +1,7 @@
 package com.aws.loadDataMicroservice;
 
+import weka.classifiers.meta.FilteredClassifier;
+import weka.classifiers.trees.J48;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 import java.io.File;
@@ -11,12 +13,12 @@ public class filterMicroserviceApplication {
     public static void main(String[] args) throws Exception{
 
         //load dataset
-        DataSource source = new DataSource("/Users/chrissindarto/Documents/PPROJECT1/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/testArff.arff");
+        DataSource source = new DataSource("/Users/jim/Desktop/JH-177 CloudWeka/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/testArff.arff");
         Instances dataset = source.getDataSet();
 
         //use filter to remove a certain attribute
         //set up options to remove 2nd attribute
-        String[] opts = new String[]{ "-R", "2"};
+        String[] opts = new String[]{ "-R", "1"};
         //create a Remove object (this is the filter class)
         Remove remove = new Remove();
         //set the filter options
@@ -29,8 +31,9 @@ public class filterMicroserviceApplication {
         //now save the dataset
         ArffSaver saver = new ArffSaver();
         saver.setInstances(newData);
-        saver.setFile(new File("/Users/chrissindarto/Documents/PPROJECT1/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/testArff2.arff"));
+        saver.setFile(new File("/Users/jim/Desktop/JH-177 CloudWeka/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/testArff2.arff"));
         saver.writeBatch();
+
     }
 }
 

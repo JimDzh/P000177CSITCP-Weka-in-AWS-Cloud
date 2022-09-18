@@ -29,7 +29,7 @@ public class LoadDataMicroserviceApplication {
 
 		// LOADING A DATASET
 		try{
-			Instances dataset = new Instances(new BufferedReader(new FileReader("P000177CSITCP-Weka-in-AWS-Cloud/Datasets/testArff_sparse.arff")));
+			Instances dataset = new Instances(new BufferedReader(new FileReader("/Users/jim/Desktop/JH-177 CloudWeka/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/testArff_sparse.arff")));
 			System.out.println(dataset.toSummaryString());
 		} catch (Exception e) {
 			System.out.println("ATTEMPT UNSUCCESSFUL");
@@ -37,5 +37,4 @@ public class LoadDataMicroserviceApplication {
 
 		SpringApplication.run(LoadDataMicroserviceApplication.class, args);
 	}
-
 }
