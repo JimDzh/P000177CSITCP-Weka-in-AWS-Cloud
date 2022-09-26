@@ -4,7 +4,7 @@
     padding: 0px;
 }
 
-.grid-container {
+.grid-container-zzz {
     margin: 0;
 }
 
@@ -25,26 +25,37 @@
     margin-top: 0.9em;
 }
 
-/*#text {*/
-/*    position: fixed;*/
-/*    font-family: Helvetica;*/
-/*    color: black;*/
-/*    !*margin-top: 3em;*!*/
-/*    !*margin-left: 4em;*!*/
-/*}*/
+.video-sect {
+    margin-top: 0;
+    font-family: Helvetica;
+}
 
-.video {
-    overflow: hidden;
-    height: 350px;
+.video-sect .video {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 360px;
+}
+
+.video video {
+    width: 125em;
 }
 
 .video-content h1 {
-    position: fixed;
-    font-family: Helvetica;
+    font-family: Arial;
+}
+
+.video-sect .video-content {
+    position: absolute;
     color: white;
-    margin-top: 3em;
-    margin-left: 4em;
+    margin-top: 10em;
+    margin-left: 6em;
+}
+
+.file-upload-form {
+    background-color: white;
+    box-shadow: none;
+    margin-top: 0;
 }
 
 .file-upload {
@@ -52,23 +63,42 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.grid-container footer {
-    grid-area: footer;
-    background: rgb(55, 41, 185);
+/*.data-summary {*/
+/*    text-align: left;*/
+/*    margin-left: 36em;*/
+/*    line-height: 1.2;*/
+/*    word-spacing: 0.1em;*/
+/*}*/
+
+/* FOR CLASSIFY */
+.data-summary {
+    text-align: left;
+    margin-left: 36em;
+    line-height: 1.2;
+    word-spacing: 0.3em;
+    font-family: Arial;
 }
 
-footer {
-    display: block;
-    position: fixed;
-    left: 0;
+.data-summary h3 {
+    font-size: 18px;
+}
+
+.footer {
+    /*position: fixed;*/
+    /* left: 0; */
     bottom: 0;
     width: 100%;
+    grid-area: footer;
+    background: rgb(55, 41, 185);
+    margin-top: 12em;
+    margin-bottom: 0;
 }
 
 footer li {
     display: inline-block;
     padding: 1em 0.5em;
     padding-left: 2em;
+    margin: 0.5em;
 }
 
 footer li a {
@@ -82,15 +112,20 @@ footer li a:hover {
     color: rgb(211, 211, 211)
 }
 
-nav {
+.right-nav nav {
     background: rgb(55, 41, 185);
     /* box-shadow: -1em; */
     margin-top: 0;
+    margin-bottom: 0;
     text-align: left;
     box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .2);
 }
 
-nav li {
+.right-nav ul {
+    margin-bottom: 0;
+}
+
+.right-nav nav li {
     display: inline-block;
     /*border: solid rgb(100, 0, 171);*/
     /* top & bottom, left & right paddings */
@@ -103,18 +138,22 @@ nav li {
     /*transition: 1 sec;*/
 }
 
-nav li a {
+.right-nav nav li a {
     text-decoration: none;
     color: white;
     font-family: Helvetica;
     /*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;*/
 }
 
-nav li a:hover {
+.right-nav nav li a:hover {
     color: rgb(211, 211, 211);
 }
 
 /*Below is the css for upload file button*/
+
+.selectFile {
+    margin: 20px;
+}
 
 /* From uiverse.io */
 .uploadFile {
@@ -144,6 +183,7 @@ nav li a:hover {
     height: 150px;
     width: 200px;
     border-radius: 50%;
+    color: white;
 }
 
 .uploadFile:hover {
@@ -166,10 +206,19 @@ nav li a:hover {
     transition: background 0s;
 }
 
-.about-weka {
-
-
+.data-table table {
+    /*padding: 4em;*/
+    background: rgba(197, 193, 237, 0.917);
+    /* border-color: #15161c; */
 }
+
+.data-table table, th, td {
+    margin: 0.6em;
+    padding: 1em;
+    text-align: center;
+    border-radius: 0.5em;
+}
+
 
 .weka-intro {
     position: absolute;
