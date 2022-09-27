@@ -93,6 +93,9 @@
 @attribute 'age' real
 @attribute 'class' { tested_negative, tested_positive}
 @data
-1,1,?,1,1,1,1,1,tested_positive
-1,85,66,29,0,26.6,0.351,31,tested_negative
+1,1,1,1,1,1,1,1,tested_positive
+1,85,1,29,0,26.6,0.351,31,tested_negative
+8,183,68,0,0,23.3,0.672,32,tested_positive
+1,1,1,1,1,1,1,1,tested_positive
+1,85,1,29,0,26.6,0.351,31,tested_negative
 8,183,68,0,0,23.3,0.672,32,tested_positive

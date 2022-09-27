@@ -8,6 +8,8 @@ import weka.filters.Filter;
 import weka.filters.unsupervised.instance.NonSparseToSparse;
 import weka.filters.unsupervised.instance.SparseToNonSparse;
 import weka.filters.unsupervised.attribute.ReplaceMissingValues;
+import weka.filters.unsupervised.attribute.ReplaceMissingWithUserConstant;
+import weka.filters.unsupervised.attribute.ReplaceWithMissingValue;
 
 public class sparseMicroserviceApplication {
 
@@ -35,6 +37,7 @@ public class sparseMicroserviceApplication {
 //        NonSparseToSparse sp = new NonSparseToSparse();
 //        SparseToNonSparse sp = new SparseToNonSparse();
         ReplaceMissingValues sp = new ReplaceMissingValues();
+
         //specify the dataset
         sp.setInputFormat(dataset);
         //apply

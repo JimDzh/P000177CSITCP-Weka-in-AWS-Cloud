@@ -1,0 +1,19 @@
+@relation pima_diabetes-weka.filters.unsupervised.attribute.ReplaceWithMissingValue-Rfirst-last-S1-P0.1
+
+@attribute preg numeric
+@attribute plas numeric
+@attribute pres numeric
+@attribute skin numeric
+@attribute insu numeric
+@attribute mass numeric
+@attribute pedi numeric
+@attribute age numeric
+@attribute class {tested_negative,tested_positive}
+
+@data
+1,1,1,1,1,?,1,1,tested_positive
+1,85,1,29,0,26.6,0.351,31,tested_negative
+8,183,68,0,?,23.3,0.672,32,tested_positive
+1,1,1,1,1,?,1,1,tested_positive
+1,85,1,29,0,26.6,0.351,?,tested_negative
+8,183,68,0,0,23.3,0.672,32,tested_positive
