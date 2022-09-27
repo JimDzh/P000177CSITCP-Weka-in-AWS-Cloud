@@ -1,15 +1,9 @@
 package com.aws.loadDataMicroservice;
-
-import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.evaluation.Evaluation;
-import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.CSVLoader;
-import weka.core.converters.ConverterUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
