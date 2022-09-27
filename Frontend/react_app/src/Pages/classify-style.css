@@ -23,3 +23,7 @@ form {
     /*font-size: larger;*/
     font-size: 40px;
 }
+
+.matrix-table {
+   margin: 0;
+}

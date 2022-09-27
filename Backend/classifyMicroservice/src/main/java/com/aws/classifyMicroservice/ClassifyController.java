@@ -17,8 +17,6 @@ public class ClassifyController {
     private ClassifyService classifyService;
     private String fileName;
 
-//    @Autowired
-//    private com.aws.loadDataMicroservice.LoadDataService loadDataService;
 
     // link: http://localhost:8082/api/classify/setFilename
     @PostMapping("/setFilename")
@@ -26,39 +24,35 @@ public class ClassifyController {
         this.fileName = fileName;
     }
 
-//    // link: http://localhost:8082/api/classify/getDataSummary
-//    @GetMapping("/getDataSummary")
-//    public List<String> getDataSummary(String algorithm, String percentage) {
-//
-////        String fileName = loadDataService.getFileName();
-//        List<String> s = null;
-//
-//        if(algorithm.equals("NaiveBayes")) {
-//            try {
-//                String summary = classifyService.naiveBayes("./Datasets/"+ this.fileName, percentage);
-//                s = new ArrayList<String>(Arrays.asList(summary.split("\n")));
-//                return s;
-//            } catch (Exception e) {
-//                System.out.println(e);
-//            }
-//        }
-//        return s;
-//    }
-
 
     // link: http://localhost:8082/api/classify/getDataSummary
     @GetMapping("/getDataSummary")
     public String getDataSummary(String algorithm, String percentage) {
 
-        if(algorithm.equals("NaiveBayes")) {
-            try {
-                String summary = classifyService.naiveBayes("./Datasets/"+ this.fileName, percentage);
-                return summary;
-            } catch (Exception e) {
-                System.out.println(e);
+        String summary = "";
+
+        try {
+            switch (algorithm) {
+                case "NaiveBayes":
+                    summary = classifyService.naiveBayes("./Datasets/"+ this.fileName, percentage);
+                    break;
+                case "ZeroR":
+                    summary = classifyService.zeroR("./Datasets/"+ this.fileName, percentage);
+                    break;
+                case "Logistic":
+                    summary = classifyService.logistic("./Datasets/"+ this.fileName, percentage);
+                    break;
             }
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        return "";
+        return summary;
+    }
+
+    // link: http://localhost:8082/api/classify/getConfusionMatrix
+    @GetMapping("/getConfusionMatrix")
+    public List<List<String>> getConfusionMatrix() {
+        return classifyService.getMatrix();
     }
 
 }

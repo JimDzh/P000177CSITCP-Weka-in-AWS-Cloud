@@ -75,7 +75,7 @@ public class LoadDataService {
         try{
             Instances dataset = new Instances(new BufferedReader(new FileReader("./Datasets/" + fileName)));
             List<String> ls = new ArrayList<String>(Arrays.asList(dataset.toSummaryString().split("\n")));
-            System.out.println(dataset.toSummaryString());
+//            System.out.println(dataset.toSummaryString());
             List<String> testing = new ArrayList<String>();
             for(String s:ls) {
                 String data = s.replaceAll("(\\s*)/(\\s*)", "\\/");
