@@ -46,26 +46,6 @@ const Home = () => {
     };
 
 
-    // TESTING FOR CLASSIFIER
-    // const pageData = () => {
-    //
-    //     const link = "http://localhost:8081/api/load-data/getDataSummary?fileName=" + fileName;
-    //     let summ = null;
-    //     axios.get(link)
-    //         .then(res => {
-    //             summ = res.data;
-    //             let rows = Array.prototype.slice.call(summ);
-    //             rows = rows.join("<br/>");
-    //             rows = "<h3>" + rows + "</h3>";
-    //             setContent(rows);
-    //
-    //             // summ = "<p>" + res.data + "</p>";
-    //             // let reg = /\\n/g;
-    //             // summ = summ.replaceAll(reg, "<br/>");
-    //             // setContent(summ);
-    //         })
-    // }
-
     const pageData = () => {
 
         const link = "http://localhost:8081/api/load-data/getDataSummary?fileName=" + fileName;

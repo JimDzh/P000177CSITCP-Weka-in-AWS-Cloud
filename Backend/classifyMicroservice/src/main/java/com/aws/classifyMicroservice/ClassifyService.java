@@ -10,14 +10,13 @@ import weka.core.Instances;
 import weka.core.Utils;
 import weka.core.converters.ConverterUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ClassifyService {
 
     private List<List<String>> matrix;
+
 
     public String naiveBayes(String splitFilePath, String trainPercentage) throws Exception {
 
@@ -27,6 +26,8 @@ public class ClassifyService {
                     sanitizedInputTP);
             Instances train = trainAndTest.get(0);
             Instances test = trainAndTest.get(1);
+            Attribute target = test.attribute(train.numAttributes()-1);
+
             //build model
             NaiveBayes naiveBayes = new NaiveBayes();
             naiveBayes.buildClassifier(train);
@@ -34,6 +35,7 @@ public class ClassifyService {
             Evaluation eval = new Evaluation(train);
             eval.evaluateModel(naiveBayes, test);
 
+            generateConfusionMatrix(eval, target);
             String result = generateResultString(naiveBayes, null, null, eval, splitFilePath, trainPercentage);
             return result;
         } else { // if input is invalid
@@ -49,18 +51,18 @@ public class ClassifyService {
                     sanitizedInputTP);
             Instances train = trainAndTest.get(0);
             Instances test = trainAndTest.get(1);
+            Attribute target = test.attribute(train.numAttributes()-1);
+
             //build model
             ZeroR zeroR = new ZeroR();
             zeroR.buildClassifier(train);
 
-            Attribute target = test.attribute(train.numAttributes()-1);
-            int cols = target.numValues();
-//            System.out.println(target.numValues());
-
             Evaluation eval = new Evaluation(train);
             eval.evaluateModel(zeroR, test);
 
+            generateConfusionMatrix(eval, target);
             String result = generateResultString(null, zeroR, null, eval, splitFilePath, trainPercentage);
+
             return result;
         } else { // if input is invalid
             return "Input should not be empty and percentage must be a number" +
@@ -75,6 +77,7 @@ public class ClassifyService {
                     sanitizedInputTP);
             Instances train = trainAndTest.get(0);
             Instances test = trainAndTest.get(1);
+            Attribute target = test.attribute(train.numAttributes()-1);
 
             //build model
             Logistic logistic = new Logistic();
@@ -85,6 +88,7 @@ public class ClassifyService {
             Evaluation eval = new Evaluation(train);
             eval.evaluateModel(logistic, test);
 
+            generateConfusionMatrix(eval, target);
             String result = generateResultString(null, null, logistic, eval, splitFilePath, trainPercentage);
             return result;
         } else { // if input is invalid
@@ -135,35 +139,49 @@ public class ClassifyService {
         }
         details = String.join("", s);
 
-        String matrix = eval.toMatrixString();
-        List<String> matrix_rows = new ArrayList<>(Arrays.asList(matrix.split("\n")));
-        matrix_rows.remove(0);
-
-        this.matrix = new ArrayList<>();
-        for(String row: matrix_rows) {
-            List<String> data = new ArrayList<>(Arrays.asList(row.split("(\\s\\s)+")));
-            List<String> rem = new ArrayList<>();
-            for(String i: data) {
-                if(i.equals("")) {
-                    rem.add(i);
-                }
-            }
-            data.removeAll(rem);
-            this.matrix.add(data);
-            System.out.println(data);
-        }
-
-//        String matrix = eval.toMatrixString("<br/><br/><h1>Confusion Matrix </h1>");
-//        s = new ArrayList<>(Arrays.asList(matrix.split("\n")));
-//        for(int i=0; i<s.size(); i++) {
-//            String data = s.get(i);
-//            data = "<p>" + data + "</p>";
-//            s.set(i, data);
-//        }
-//        matrix = String.join("", s);
-
         String result = information + summary + details;
         return result;
+    }
+
+    private void generateConfusionMatrix(Evaluation eval, Attribute target) {
+
+        this.matrix = new ArrayList<>();
+        double[][] double_matrix = eval.confusionMatrix();
+        List<String> labels = new ArrayList<>();
+        char[] alphabets = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+                's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+
+        int size = double_matrix[0].length;
+        for(int i=0; i < size; i++) {
+            String class_label = String.valueOf(alphabets[i]);
+            labels.add(class_label);
+        }
+        labels.add("<-- Classified as");
+        this.matrix.add(labels);
+
+        Enumeration<Object> vals = target.enumerateValues();
+        List<Object> values = Collections.list(vals);
+        for(int i=0; i<double_matrix.length; i++) {
+            List<String> row = new ArrayList<>();
+            for(double j: double_matrix[i]) {
+                row.add(Double.toString(j));
+            }
+//            String desc = labels.get(i) + " = " + values.get(i).toString();
+            String desc = alphabets[i] + " = " + values.get(i).toString();
+            row.add(desc);
+            this.matrix.add(row);
+        }
+
+//        for(List<String> i: this.matrix) {
+//            System.out.println(i);
+////            System.out.println("\n");
+////            for(double j: i) {
+////                System.out.print(j);
+////                System.out.print(" ");
+////            }
+////            System.out.print("\n");
+//        }
+//        System.out.println("\n");
     }
 
     private String getLastAttributeNameType(String splitFilePath) throws Exception {

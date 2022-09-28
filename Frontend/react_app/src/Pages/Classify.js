@@ -5,45 +5,35 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './classify-style.css';
 import axios from "axios";
 
-// import {fileName} from './Home';
 
 // Classify component
 const Classify = () => {
 
-    // const [fileName, setFileName] = useState("");
     const [content, setContent] = useState(null);
     const [algorithm, setAlgorithm] = useState(null);
     const [percentage, setPercentage] = useState("");
     const [nominal, setNominal] = useState(null);
     const [confMatrix, setConfMatrix] = useState(null);
 
-    const fileSubmitHandler = (event) => {
+    const submitHandler = (event) => {
         event.preventDefault();
-        console.log(percentage);
-        console.log(algorithm);
-
+        setContent(null);
         let link = "http://localhost:8082/api/classify/getDataSummary?algorithm=" + algorithm + "&percentage=" + percentage;
         let summary = null;
         axios.get(link)
             .then(res => {
                 summary = res.data;
-                // let rows = Array.prototype.slice.call(summary);
-                // rows = rows.join("<br/>");
-                // rows = "<p>" + rows + "</p>";
-                // setContent(rows);
-
                 setContent(summary);
                 matrix();
             })
-
         setAlgorithm("");
         setPercentage("");
     }
 
     const matrix = () => {
-
         let link = "http://localhost:8082/api/classify/getConfusionMatrix";
         let matrix = null;
+        setConfMatrix(null);
         axios.get(link)
             .then(res => {
                 matrix = Array.prototype.slice.call(res.data);
@@ -74,7 +64,7 @@ const Classify = () => {
     return (
         <div>
             <div className="form-container">
-                <Form onSubmit={fileSubmitHandler}>
+                <Form onSubmit={submitHandler}>
                     <Form.Group>
                         <Form.Select name="type" onChange={event => setNominal(event.target.value === "nominal")}>
                             <option>Select the type of your target attribute</option>
@@ -118,13 +108,18 @@ const Classify = () => {
             <div className="classify-content">
                 {/* If content exists, show it */}
                 {content ? (
-                    <div className="data-summary">
-                        <div dangerouslySetInnerHTML={{ __html: content }}/>
-                        <br/>
-                        <h1>TESTING</h1>
-                        {/*<div dangerouslySetInnerHTML={{ __html: confMatrix }}/>*/}
-                        {confMatrix}
-                    </div>
+                    confMatrix ? (
+                        <div className="data-summary">
+                            <div dangerouslySetInnerHTML={{ __html: content }}/>
+                            <br/><br/>
+                            <h1>Confusion Matrix</h1>
+                            <br/>
+                            <div dangerouslySetInnerHTML={{ __html: confMatrix }}/>
+                            {/*{confMatrix}*/}
+                        </div>
+                    ):(
+                        <div></div>
+                    )
                 ):(
                     <div>
                         <br/><br/><br/><br/><br/><br/><br/><br/>

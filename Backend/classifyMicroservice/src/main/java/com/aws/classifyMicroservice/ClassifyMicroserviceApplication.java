@@ -9,7 +9,7 @@ public class ClassifyMicroserviceApplication {
 
 //        ClassifyService classifyService = new ClassifyService();
 //        try {
-//            String summary = classifyService.zeroR("./Datasets/"+ "heart-clean.arff", "80");
+//            String summary = classifyService.logistic("./Datasets/"+ "heart-clean.arff", "80");
 ////            System.out.println(summary);
 //        } catch (Exception e) {
 //            System.out.println(e);
