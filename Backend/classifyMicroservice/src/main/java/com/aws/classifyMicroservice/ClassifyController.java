@@ -17,6 +17,11 @@ public class ClassifyController {
     private ClassifyService classifyService;
     private String fileName;
 
+    public ClassifyController(){ // have to do this as the  ClassifyController initialised, the classifyServie is
+        //initialised as well so when call getDataSummary, it will use the initialised classifyService elimate
+        // the null point exception
+        classifyService = new ClassifyService();
+    }
 //    @Autowired
 //    private com.aws.loadDataMicroservice.LoadDataService loadDataService;
 
@@ -52,13 +57,18 @@ public class ClassifyController {
 
         if(algorithm.equals("NaiveBayes")) {
             try {
-                String summary = classifyService.naiveBayes("./Datasets/"+ this.fileName, percentage);
+                //String summary = classifyService.naiveBayes("./Datasets/"+ this.fileName, percentage);
+                String summary = classifyService.naiveBayes("/Users/ethan/Desktop/Programming project/Github-Repo/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/"+ this.fileName, percentage);
                 return summary;
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
         return "";
+    }
+
+    public String getFileName() {
+        return this.fileName;
     }
 
 }
