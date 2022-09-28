@@ -16,6 +16,7 @@ import java.util.*;
 public class ClassifyService {
 
     private List<List<String>> matrix;
+    private List<List<String>> details;
 
 
     public String naiveBayes(String splitFilePath, String trainPercentage) throws Exception {
@@ -35,6 +36,7 @@ public class ClassifyService {
             Evaluation eval = new Evaluation(train);
             eval.evaluateModel(naiveBayes, test);
 
+            generateDetailsTable(eval);
             generateConfusionMatrix(eval, target);
             String result = generateResultString(naiveBayes, null, null, eval, splitFilePath, trainPercentage);
             return result;
@@ -60,6 +62,7 @@ public class ClassifyService {
             Evaluation eval = new Evaluation(train);
             eval.evaluateModel(zeroR, test);
 
+            generateDetailsTable(eval);
             generateConfusionMatrix(eval, target);
             String result = generateResultString(null, zeroR, null, eval, splitFilePath, trainPercentage);
 
@@ -88,6 +91,7 @@ public class ClassifyService {
             Evaluation eval = new Evaluation(train);
             eval.evaluateModel(logistic, test);
 
+            generateDetailsTable(eval);
             generateConfusionMatrix(eval, target);
             String result = generateResultString(null, null, logistic, eval, splitFilePath, trainPercentage);
             return result;
@@ -99,6 +103,10 @@ public class ClassifyService {
 
     public List<List<String>> getMatrix() {
         return this.matrix;
+    }
+
+    public List<List<String>> getDetails() {
+        return this.details;
     }
 
 
@@ -115,13 +123,13 @@ public class ClassifyService {
             scheme = l.getClass().getName();
         }
 
-        String information = "<h1>Information: </h1><br/>" +
+        String information = "<h2>Information: </h2><br/>" +
                 "<p><b>Scheme:</b> " + scheme + "</p>" +
                 "<p><b>Predicted attribute:</b> " + getLastAttributeNameType(filePath) + "</p>" +
                 "<p><b>Mode:</b> " + "Split " + trainPercentage + "% for train, " +
                 (100-Integer.parseInt(trainPercentage)) + "% for test</p>";
 
-        String summary = eval.toSummaryString("<br/><br/><h1>Summary </h1>", false) ;
+        String summary = eval.toSummaryString("<br/><h2>Summary </h2>", false) ;
         List<String> s = new ArrayList<>(Arrays.asList(summary.split("\n")));
         for(int i=0; i<s.size(); i++) {
             String data = s.get(i);
@@ -129,22 +137,24 @@ public class ClassifyService {
             s.set(i, data);
         }
         summary = String.join("", s);
-
-        String details = eval.toClassDetailsString("<br/><br/><h1>Detailed Accuracy By Class </h1>");
-        s = new ArrayList<>(Arrays.asList(details.split("\n")));
-        for(int i=0; i<s.size(); i++) {
-            String data = s.get(i);
-            data = "<p>" + data + "</p>";
-            s.set(i, data);
-        }
-        details = String.join("", s);
-
-        String result = information + summary + details;
+        String result = information + summary;
         return result;
     }
 
-    private void generateConfusionMatrix(Evaluation eval, Attribute target) {
+    private void generateDetailsTable(Evaluation eval) throws Exception {
+        this.details = new ArrayList<>();
+        String details = eval.toClassDetailsString();
+        List<String> rows = new ArrayList<>(Arrays.asList(details.split("\n")));
+        for(int i=2; i<rows.size(); i++) {
+            String row = rows.get(i);
+            row = row.replaceAll("(\\s\\s)+", ",");
+            List<String> row_data = new ArrayList<>(Arrays.asList(row.split(",")));
+//            System.out.println(row_data);
+            this.details.add(row_data);
+        }
+    }
 
+    private void generateConfusionMatrix(Evaluation eval, Attribute target) {
         this.matrix = new ArrayList<>();
         double[][] double_matrix = eval.confusionMatrix();
         List<String> labels = new ArrayList<>();
@@ -166,22 +176,10 @@ public class ClassifyService {
             for(double j: double_matrix[i]) {
                 row.add(Double.toString(j));
             }
-//            String desc = labels.get(i) + " = " + values.get(i).toString();
             String desc = alphabets[i] + " = " + values.get(i).toString();
             row.add(desc);
             this.matrix.add(row);
         }
-
-//        for(List<String> i: this.matrix) {
-//            System.out.println(i);
-////            System.out.println("\n");
-////            for(double j: i) {
-////                System.out.print(j);
-////                System.out.print(" ");
-////            }
-////            System.out.print("\n");
-//        }
-//        System.out.println("\n");
     }
 
     private String getLastAttributeNameType(String splitFilePath) throws Exception {

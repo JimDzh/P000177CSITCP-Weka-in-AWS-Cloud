@@ -14,6 +14,7 @@ const Classify = () => {
     const [percentage, setPercentage] = useState("");
     const [nominal, setNominal] = useState(null);
     const [confMatrix, setConfMatrix] = useState(null);
+    const [detailsTable, setDetailsTable] = useState(null);
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -24,10 +25,46 @@ const Classify = () => {
             .then(res => {
                 summary = res.data;
                 setContent(summary);
-                matrix();
+                details();
             })
+
+        event.target['algorithm'].value = "";
+        event.target['type'].value = "";
+        // console.log(event.target['algorithm'].value);
         setAlgorithm("");
         setPercentage("");
+    }
+
+    const details = () => {
+        let link = "http://localhost:8082/api/classify/getDetails";
+        let details = null;
+        setDetailsTable(null);
+        axios.get(link)
+            .then(res => {
+                details = Array.prototype.slice.call(res.data);
+                setDetailsTable(
+                    <div>
+                        <div className="matrix-table">
+                            <table>
+                                {
+                                    details.map((i) => (
+                                        <tr>
+                                            {
+                                                i.map((j) => (
+                                                    <td key={j}>
+                                                        <b>{j}</b>
+                                                    </td>
+                                                ))
+                                            }
+                                        </tr>
+                                    ))
+                                }
+                            </table>
+                        </div>
+                    </div>
+                );
+                matrix();
+            })
     }
 
     const matrix = () => {
@@ -67,7 +104,7 @@ const Classify = () => {
                 <Form onSubmit={submitHandler}>
                     <Form.Group>
                         <Form.Select name="type" onChange={event => setNominal(event.target.value === "nominal")}>
-                            <option>Select the type of your target attribute</option>
+                            <option value="">Select the type of your target attribute</option>
                             <option value="nominal">Nominal</option>
                             <option value="numeric">Numeric</option>
                         </Form.Select>
@@ -76,7 +113,7 @@ const Classify = () => {
                     <Form.Group>
                         {nominal ? (
                             <Form.Select name="algorithm" onChange={event => setAlgorithm(event.target.value)}>
-                                <option>Select an algorithm for classification</option>
+                                <option value="">Select an algorithm for classification</option>
                                 {/* used for nominal target variables */}
                                 <option value="NaiveBayes">Naive Bayes</option>
                                 <option value="ZeroR">Zero R</option>
@@ -109,21 +146,28 @@ const Classify = () => {
                 {/* If content exists, show it */}
                 {content ? (
                     confMatrix ? (
-                        <div className="data-summary">
+                        <div className="classify-summary">
                             <div dangerouslySetInnerHTML={{ __html: content }}/>
                             <br/><br/>
-                            <h1>Confusion Matrix</h1>
+                            <h2>Confusion Matrix</h2>
                             <br/>
-                            <div dangerouslySetInnerHTML={{ __html: confMatrix }}/>
-                            {/*{confMatrix}*/}
+                            {confMatrix}
+                            {detailsTable ? (
+                                <div className="details-summary">
+                                    <br/><br/><br/>
+                                    <h2>Detailed Accuracy By Class </h2>
+                                    <br/><br/>
+                                    {detailsTable}
+                                </div>
+                            ) : (
+                                <div></div>
+                            )}
                         </div>
                     ):(
                         <div></div>
                     )
                 ):(
-                    <div>
-                        <br/><br/><br/><br/><br/><br/><br/><br/>
-                    </div>
+                    <div></div>
                 )}
             </div>
         </div>

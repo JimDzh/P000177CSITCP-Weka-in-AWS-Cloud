@@ -55,4 +55,10 @@ public class ClassifyController {
         return classifyService.getMatrix();
     }
 
+    // link: http://localhost:8082/api/classify/getDetails
+    @GetMapping("/getDetails")
+    public List<List<String>> getDetails() {
+        return classifyService.getDetails();
+    }
+
 }

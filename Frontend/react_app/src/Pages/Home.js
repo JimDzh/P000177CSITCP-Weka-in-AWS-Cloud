@@ -144,7 +144,7 @@ const Home = () => {
                       <br /><br />
                       <button className="uploadFile" type='submit' >Upload File</button>
                   </form>
-                  <br />
+                  {/*<br />*/}
 
                   {/* If content exists, show it */}
                   {content ? (
@@ -155,11 +155,6 @@ const Home = () => {
                   ):(
                       <div></div>
                   )}
-
-                  {/*<div className="data-summary">*/}
-                  {/*    /!*{content}*!/*/}
-                  {/*    <div dangerouslySetInnerHTML={{ __html: content }}/>*/}
-                  {/*</div>*/}
               </section>
           </div>
     );
