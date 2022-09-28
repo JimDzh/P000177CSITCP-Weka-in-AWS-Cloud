@@ -1,10 +1,10 @@
-package com.aws.weka;
+package com.aws.clusterMicroservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WekaApplicationTests {
+class ClusterMicroserviceApplicationTests {
 
 	@Test
 	void contextLoads() {
