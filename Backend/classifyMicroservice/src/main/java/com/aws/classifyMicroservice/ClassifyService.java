@@ -129,11 +129,11 @@ public class ClassifyService {
                 "<p><b>Mode:</b> " + "Split " + trainPercentage + "% for train, " +
                 (100-Integer.parseInt(trainPercentage)) + "% for test</p>";
 
-        String summary = eval.toSummaryString("<br/><h2>Summary </h2>", false) ;
+        String summary = eval.toSummaryString("<br/><h2>Summary </h2><br/>", false) ;
         List<String> s = new ArrayList<>(Arrays.asList(summary.split("\n")));
-        for(int i=0; i<s.size(); i++) {
+        for(int i=1; i<s.size(); i++) {
             String data = s.get(i);
-            data = "<p>" + data + "</p>";
+            data = "<p><b>" + data + "</b></p>";
             s.set(i, data);
         }
         summary = String.join("", s);
