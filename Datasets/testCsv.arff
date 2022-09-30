@@ -1,0 +1,13 @@
+@relation testCsv
+
+@attribute Username {booker12,grey07,johnson81,jenkins46,smith79}
+@attribute Identifier numeric
+@attribute 'First name' {Rachel,Laura,Craig,Mary,Jamie}
+@attribute 'Last name' {Booker,Grey,Johnson,Jenkins,Smith}
+
+@data
+booker12,9012,Rachel,Booker
+grey07,2070,Laura,Grey
+johnson81,4081,Craig,Johnson
+jenkins46,9346,Mary,Jenkins
+smith79,5079,Jamie,Smith
