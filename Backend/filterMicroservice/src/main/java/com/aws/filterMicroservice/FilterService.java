@@ -25,11 +25,12 @@ public class FilterService {
 
     // Remove selected attribute based on user input
     public List<String> removeAttribute (String input, String filePath) {
+        Instances newData;
         try {
             Instances dataset = loadDataSet(filePath);
             //delete an Attribute
             Attribute target = dataset.attribute(input);
-            String target_index = String.valueOf(target.index());
+            String target_index = String.valueOf(target.index() + 1);
             //use filter to remove a certain attribute
             //set up options to remove input attribute
             String[] opts = new String[]{"-R", target_index};
@@ -40,15 +41,19 @@ public class FilterService {
             //pass the dataset to the filter
             remove.setInputFormat(dataset);
             //apply the filter
-            Instances newData = Filter.useFilter(dataset, remove);
-            saveData(newData, filePath);
+            newData = Filter.useFilter(dataset, remove);
+            boolean saved = saveData(newData, filePath);
 
-            List<String> summary = createSummaryString(dataset);
-            return summary;
+            if(saved) {
+                return createSummaryString(newData);
+            } else {
+                return null;
+            }
+
         } catch(Exception e) {
             System.out.println(e);
+            return null;
         }
-        return null;
     }
 
 
@@ -75,7 +80,7 @@ public class FilterService {
             Instances newData = Filter.useFilter(dataset, sp);
             saveData(newData, filePath);
 
-            List<String> summary = createSummaryString(dataset);
+            List<String> summary = createSummaryString(newData);
             return summary;
         } catch(Exception e) {
             System.out.println(e);
@@ -98,13 +103,14 @@ public class FilterService {
             Instances newData = Filter.useFilter(dataset, sp);
             saveData(newData, filePath);
 
-            List<String> summary = createSummaryString(dataset);
+            List<String> summary = createSummaryString(newData);
             return summary;
         } catch(Exception e) {
             System.out.println(e);
         }
         return null;
     }
+
 
     public List<String> getAttributes(String filePath) {
         Instances dataset = loadDataSet(filePath);
@@ -120,20 +126,20 @@ public class FilterService {
     // HELPER METHODS ---------------------------------------------------------------------------------------------------------
 
     public List<String> createSummaryString(Instances dataset) {
+        List<String> final_summary = new ArrayList<String>();
         try{
             List<String> ls = new ArrayList<String>(Arrays.asList(dataset.toSummaryString().split("\n")));
-            List<String> testing = new ArrayList<String>();
             for(String s:ls) {
                 String data = s.replaceAll("(\\s*)/(\\s*)", "\\/");
                 data = data.replaceAll("\\s+", " ");
-                testing.add(data);
+                final_summary.add(data);
             }
-            return testing;
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("SUMMARY PROCESS UNSUCCESSFUL");
+            return null;
         }
-        return null;
+        return final_summary;
     }
 
     public Instances loadDataSet(String filePath) {
@@ -148,14 +154,16 @@ public class FilterService {
         return null;
     }
 
-    public void saveData(Instances instances, String filePath) {
+    public boolean saveData(Instances instances, String filePath) {
         try {
             ArffSaver saver = new ArffSaver();
             saver.setInstances(instances);
             saver.setFile(new File(filePath));
             saver.writeBatch();
+            return true;
         } catch(Exception e) {
             System.out.println(e);
+            return false;
         }
     }
 

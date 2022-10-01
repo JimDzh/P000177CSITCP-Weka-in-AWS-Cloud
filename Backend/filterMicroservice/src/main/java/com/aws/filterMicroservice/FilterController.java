@@ -24,6 +24,7 @@ public class FilterController {
     // link: http://localhost:8083/api/filter/removeAttribute
     @PostMapping("/removeAttribute")
     public List<String> removeAttribute(String attribute) {
+//        System.out.println(attribute);
         return filterService.removeAttribute(attribute, this.filePath);
     }
 
@@ -44,5 +45,6 @@ public class FilterController {
     public List<String> getAttributes() {
         return filterService.getAttributes(filePath);
     }
+
 
 }
