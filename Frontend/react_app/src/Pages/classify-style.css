@@ -20,10 +20,6 @@ form {
     word-spacing: 0em;
 }
 
-/*.classify-content  {*/
-/*    !*font-size: larger;*!*/
-/*    font-size: 40px;*/
-/*}*/
 
 .matrix-table {
    margin: 0;
@@ -65,11 +61,25 @@ h2 {
     color: rgb(55, 41, 185);
 }
 
-/*.classify-summary h3 {*/
-/*    font-size: 18px;*/
-/*}*/
+.filter-content {
+    margin-bottom: 36.9em;
+}
 
-/*.details-summary {*/
-/*    margin-left: 36em;*/
-/*    font-family: Arial;*/
-/*}*/
+.filter-summary {
+    margin-bottom: 9.5em;
+    margin-left: 30em;
+}
+
+.filter-summary h3 {
+    font-size: 18px;
+}
+
+.filter-error {
+    margin-bottom: 30.5em;
+    color: red;
+}
+
+.filter-error h3 {
+    font-size: larger;
+}
+

@@ -54,14 +54,16 @@ const Cluster = () => {
                     </Button>
                 </Form>
             </div>
-            <div className="cluster-content">
+            <div>
                 {/* If content exists, show it */}
                 {content ? (
                     <div className="cluster-summary">
                         <div dangerouslySetInnerHTML={{ __html: content }}/>
                         {/*<br/><br/>*/}
                     </div>
-                ): null}
+                ): (
+                    <div className="cluster-content"></div>
+                )}
             </div>
         </div>
     )

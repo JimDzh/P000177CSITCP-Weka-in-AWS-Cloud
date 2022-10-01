@@ -142,7 +142,7 @@ const Classify = () => {
                 </Form>
             </div>
             <br/>
-            <div className="classify-content">
+            <div>
                 {/* If content exists, show it */}
                 {content ? (
                     confMatrix ? (
@@ -162,7 +162,9 @@ const Classify = () => {
                             ) : null}
                         </div>
                     ): null
-                ): null}
+                ): (
+                    <div className="classify-content"></div>
+                )}
             </div>
         </div>
     )

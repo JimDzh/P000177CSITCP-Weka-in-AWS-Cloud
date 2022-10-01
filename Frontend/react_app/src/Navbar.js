@@ -1,6 +1,6 @@
 import React from 'react';
 import './Pages/style.css';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 // Navbar component
 const Navbar = () => {
@@ -17,14 +17,13 @@ const Navbar = () => {
         <div className="right-nav">
             <nav>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/preprocess">Preprocess</a></li>
-                    <li><a href="/classify">Classify</a></li>
-                    <li><a href="/cluster">Cluster</a></li>
-                    <li><a href="/associate">Associate</a></li>
-                    <li><a href="/select-attributes">Select attributes</a></li>
-                    <li><a href="/visualise">Visualise</a></li>
-                    <li><a href="/help">Help</a></li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/preprocess">Preprocess</Link></li>
+                    <li><Link to="/classify">Classify</Link></li>
+                    <li><Link to="/cluster">Cluster</Link></li>
+                    <li><Link to="/visualise">Visualise</Link></li>
+                    <li><Link to="/help">Help</Link></li>
+                    {/*<li><Link to='/'>Home</Link></li>*/}
                 </ul>
             </nav>
         </div>

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import video from '../Videos/weka_video.mp4';
 import './style.css';
+import {useCookies} from "react-cookie";
 
 // Home component
 const Home = () => {
@@ -9,13 +10,25 @@ const Home = () => {
     const [file, setFile] = useState('');
     const [fileName, setFileName] = useState("");
     const [content, setContent] = useState(null);
+    const [cookies, setCookie] = useCookies(['file-name']);
 
     //base end point url
     const FILE_UPLOAD_BASE_ENDPOINT = "http://localhost:8081/api/load-data/";
 
+    // useEffect(()=>{
+    //     if(content !== null) {
+    //         setCookie('name', fileName, {path: '/'});
+    //     }
+    //     // console.log("name: ", cookies.name)
+    //     // if(cookies.name !== "") {
+    //     //     pageData();
+    //     // }
+    // },[content])
+
     const uploadFileHandler = (event) => {
         setFile(event.target.files[0]);
         setFileName(event.target.files[0].name);
+        // setCookie('name', fileName, {path: '/'});
     };
 
     const fileSubmitHandler = (event) => {
@@ -50,6 +63,8 @@ const Home = () => {
             }
         );
 
+        // setCookie('name', fileName, {path: '/'});
+
         // axios.post("http://localhost:8081/api/load-data/uploadFile", selectedFile);
         fetch(FILE_UPLOAD_BASE_ENDPOINT + 'uploadFile', requestOptions)
             .then(r  => {
@@ -61,12 +76,13 @@ const Home = () => {
 
 
     const pageData = () => {
-
-        const link = "http://localhost:8081/api/load-data/getDataSummary?fileName=" + fileName;
+        let link = "http://localhost:8081/api/load-data/getDataSummary?fileName=" + fileName;
+        // console.log("Link: " + link);
         let summ = null;
         axios.get(link)
             .then(res => {
                 summ = res.data;
+                // console.log(summ);
                 let rows = Array.prototype.slice.call(summ);
                 let final = [];
                 let header = ["ID", "AttributeName", "Type", "Nominal", "Integer", "Real", "MissingValues", "UniqueValues", "DistinctValues"];
@@ -151,22 +167,21 @@ const Home = () => {
               <br/>
               <section className="file-upload">
                   <h2><b>Start by uploading a database file</b></h2>
-                  {/*<br/>*/}
                   <form className="file-upload-form" onSubmit={fileSubmitHandler}>
                       <input type="file" className="selectFile" accept=".arff,.arff.gz,.names,.data,.csv,.json,.json.gz,
                       .libsvm,.m,.dat,.bsi,.xrff,.xrff.gz" onChange={uploadFileHandler} />
                       <br /><br />
                       <button className="uploadFile" type='submit' >Upload File</button>
                   </form>
-                  {/*<br />*/}
-
                   {/* If content exists, show it */}
                   {content ? (
                       <div className="data-summary">
                           {content}
-                          {/*<div dangerouslySetInnerHTML={{ __html: content }}/>*/}
                       </div>
-                  ): null}
+                  ):null}
+                  {/*{cookies.name ? (*/}
+                  {/*    <h3><br/><br/><b>You can now check your data summary in the 'Visualise' page</b></h3>*/}
+                  {/*) : null}*/}
               </section>
           </div>
     );

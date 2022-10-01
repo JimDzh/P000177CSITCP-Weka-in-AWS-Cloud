@@ -13,37 +13,25 @@ const Filter = () => {
     const [removeOptions, setRemoveOptions] = useState(null);
     const [replaceConstantOptions, setReplaceConstantOptions] = useState(null);
     const [constant, setConstant] = useState(null);
-    const [attribute, setAttribute] = useState(null);
+    // const [attribute, setAttribute] = useState(null);
     const [content, setContent] = useState(null);
+    // const [summary, setSummary] = useState(null);
 
 
     const submitHandler = (event) => {
         event.preventDefault();
         setContent(null);
         let base_link = "http://localhost:8083/api/filter/";
-        let summary = null;
 
         if(remove) {
             let link = base_link + "removeAttribute?attribute=" + event.target["attribute"].value;
-            axios.post(link)
-                .then(res => {
-                    summary = res.data;
-                    // setContent(summary);
-                })
+            generateSummary(link, event.target["attribute"].value);
         } else if(replaceConstant) {
             let link = base_link + "replaceMissing-constant?constant=" + constant;
-            axios.post(link)
-                .then(res => {
-                    summary = res.data;
-                    // setContent(summary);
-                })
+            generateSummary(link, null);
         } else if(replaceMean) {
             let link = base_link + "replaceMissing-mean";
-            axios.post(link)
-                .then(res => {
-                    summary = res.data;
-                    // setContent(summary);
-                })
+            generateSummary(link, null);
         }
 
         event.target['filter'].value = "";
@@ -58,6 +46,7 @@ const Filter = () => {
                 setRemove(true);
                 setReplaceMean(null);
                 setReplaceConstant(null);
+                // setAttribute(null);
                 generateRemoveOptions();
                 break;
             case "replaceConstant":
@@ -105,6 +94,89 @@ const Filter = () => {
         );
     }
 
+    const generateSummary = (link, attribute) => {
+
+        let summary = null;
+        axios.post(link)
+            .then(res => {
+                summary = res.data;
+                let rows = Array.prototype.slice.call(summary);
+                if (summary) {
+                    let final = [];
+                    let header = ["ID", "AttributeName", "Type", "Nominal", "Integer", "Real", "MissingValues", "UniqueValues", "DistinctValues"];
+                    let info = [];
+                    for(let i=0; i < rows.length;i++) {
+                        if (i > 4) {
+                            let data = rows[i];
+                            let data_array = data.split(" ");
+                            for(let j=0; j < data_array.length;j++) {
+                                if(data_array[j] === "" || data_array[j] === " ") {
+                                    delete data_array[j];
+                                }
+                            }
+                            final.push(data_array);
+                        }
+                        else if (i < 3) {
+                            if (rows[i] !== "") {
+                                info.push(rows[i]);
+                            }
+                        }
+                    }
+
+                    setContent(
+                        <div>
+                            {remove ? (
+                                <h3><b>The attribute '{attribute}' has been successfully removed!</b></h3>
+                            ):null}
+                            {replaceConstant ? (
+                                <h3><b>All numerical missing values have been successfully replaced with '{constant}',<br/>
+                                    and all the nominal missing values have been successfully replaced with 'null' </b></h3>
+                            ):null}
+                            {replaceMean ? (
+                                <h3><b>All missing values have been successfully replaced with the mean!</b></h3>
+                            ):null}
+                            <br/><br/>
+                            {
+                                info.map((i) => (
+                                    <h3 key={i}><b>{i}</b></h3>
+                                ))
+                            }
+                            <br/><br/>
+                            <div className="data-table">
+                                <table>
+                                    <tr>
+                                        {
+                                            header.map((i) => (
+                                                <th key={i}> {i} </th>
+                                            ))
+                                        }
+                                    </tr>
+                                    {
+                                        final.map((i) => (
+                                            <tr>
+                                                {
+                                                    i.map((j) => (
+                                                        <td key={j}>{j}</td>
+                                                    ))
+                                                }
+                                            </tr>
+                                        ))
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    );
+                } else {
+                    setContent(
+                        <div className="filter-error">
+                            <h3><b>The attribute '{attribute}' cannot removed since it is the only attribute of the dataset!</b></h3>
+                        </div>
+                    );
+                }
+            })
+    }
+
+
     return (
         <div>
             <div className="form-container">
@@ -129,6 +201,16 @@ const Filter = () => {
                         Submit
                     </Button>
                 </Form>
+                <div>
+                    {/* If content exists, show it */}
+                    {content ? (
+                        <div className="filter-summary">
+                            {content}
+                        </div>
+                    ): (
+                        <div className="filter-content"></div>
+                    )}
+                </div>
             </div>
         </div>
     );
