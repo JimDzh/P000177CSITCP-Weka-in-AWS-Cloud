@@ -12,6 +12,14 @@ public class LoadDataController {
 
     @Autowired
     private LoadDataService loadDataService;
+    private String fileName;
+
+
+    // link: http://localhost:8081/api/load-data/getFilename
+    @GetMapping("/getFilename")
+    public String getFilename() {
+        return this.fileName;
+    }
 
     // link: http://localhost:8081/api/load-data/getDataSummary
     @GetMapping("/getDataSummary")
@@ -20,7 +28,6 @@ public class LoadDataController {
         List<String> summary = loadDataService.createSummaryString(name);
         return summary;
     }
-
 
     /**
      * Method to upload file
@@ -32,9 +39,14 @@ public class LoadDataController {
         boolean uploadCheck = loadDataService.uploadFile(file);
         if(uploadCheck) {
             System.out.println("SUCCESSFULLY SAVED THE DATASET: " + file.getOriginalFilename());
+            setFileName(file.getOriginalFilename());
         } else {
             System.out.println("ATTEMPT UNSUCCESSFUL");
         }
+    }
+
+    private void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
 }
