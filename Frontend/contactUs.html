@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEKA</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!--    <script src="index.js"></script>-->
+    <style>
+
+        input[type=text], select, textarea {
+            width: 100%; /* Full width */
+            padding: 12px; /* Some padding */
+            border: 1px solid #ccc; /* Gray border */
+            border-radius: 4px; /* Rounded borders */
+            box-sizing: border-box; /* Make sure that padding and width stays in place */
+            margin-top: 6px; /* Add a top margin */
+            margin-bottom: 16px; /* Bottom margin */
+            resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+        }
+
+        input[type=submit] {
+            background-color: #0433aa;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #89a3e5;
+        }
+
+        .container {
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="grid-container">
+
+    <div class="left-nav">
+        <img class="rmit-logo"
+             src="https://keypath.uk.com/sites/uk/files/styles/half_width_600w_/public/image/2020-07/Rmit-White.png?itok=hUXxaWnz"
+             alt="RMIT's logo">
+        <img class="weka-logo"
+             src="https://dashboard.snapcraft.io/site_media/appmedia/2021/10/weka.png"
+             alt="WEKA's logo">
+    </div>
+    <div class="right-nav">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="">Preprocess</a></li>
+                <li><a href="">Classify</a></li>
+                <li><a href="">Cluster</a></li>
+                <li><a href="">Associate</a></li>
+                <li><a href="">Select attributes</a></li>
+                <li><a href="">Visualise</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <form style="margin: auto; width: 220px;">
+
+            <label for="name">Name</label>
+            <input type="text" id="name" name="userName" placeholder="Your name..">
+
+            <label for="email">Email</label>
+            <input type="text" id="email" name="userEmail" placeholder="Your email..">
+
+            <label for="message">Subject</label>
+            <textarea id="message" name="userMessage" placeholder="Write something.." style="height:200px"></textarea>
+            <input type="submit" value="Submit">
+
+        </form>
+    </div>
+
+    <div className = "Social-Media">
+        <a href = "https://www.facebook.com/"><i className="fa fa-facebook-official w3-hover-opacity"></i></a>
+        <a href = "https://www.instagram.com/"><i className="fa fa-instagram w3-hover-opacity"></i></a>
+        <a href = "https://www.twitter.com/"><i className="fa fa-twitter w3-hover-opacity"></i></a>
+        <a href = "https://www.linkedin.com/"><i className="fa fa-linkedin w3-hover-opacity"></i></a>
+    </div>
+
+    <footer>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="contactUs.html">Contact us</a></li>
+    </footer>
+</div>
+</body>
+</html>
