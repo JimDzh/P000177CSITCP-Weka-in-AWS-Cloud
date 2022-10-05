@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './Pages/style.css';
 
 import About from "./Pages/About";
@@ -9,9 +8,10 @@ import Error from "./Pages/Error"
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Classify from "./Pages/Classify";
-import Preprocess from "./Pages/Preprocess";
 import Cluster from "./Pages/Cluster";
 import Help from "./Pages/Help";
+import ContactUs from "./Pages/ContactUs";
+import Filter from "./Pages/Filter";
 
 // Main component
 const App = () => {
@@ -21,9 +21,10 @@ const App = () => {
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/preprocess' element={<Preprocess/>} />
+            <Route path='/preprocess' element={<Filter />} />
             <Route path='/classify' element={<Classify />} />
             <Route path='/cluster' element={<Cluster />} />
+            <Route path='/contact' element={<ContactUs />} />
             <Route path='/about' element={<About />} />
             <Route path='/help' element={<Help />} />
             <Route path='*' element={<Error />} />

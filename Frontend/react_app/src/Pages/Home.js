@@ -136,7 +136,7 @@ const Home = () => {
                     setContent(
                         <div>
                             <h3><b>The file '{fileName}' has been successfully uploaded!</b></h3>
-                            <br/><br/>
+                            <br/><br/><br/>
                             {
                                 info.map((i) => (
                                     <h3 key={i}><b>{i}</b></h3>

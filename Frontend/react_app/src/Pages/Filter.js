@@ -13,10 +13,9 @@ const Filter = () => {
     const [removeOptions, setRemoveOptions] = useState(null);
     const [replaceConstantOptions, setReplaceConstantOptions] = useState(null);
     const [constant, setConstant] = useState(null);
-    // const [attribute, setAttribute] = useState(null);
     const [content, setContent] = useState(null);
-    // const [summary, setSummary] = useState(null);
-
+    const [nominal, setNominal] = useState(null);
+    // const [selected, setSelected] = useState([]);
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -25,19 +24,28 @@ const Filter = () => {
 
         if(remove) {
             let link = base_link + "removeAttribute?attribute=" + event.target["attribute"].value;
+            // let atts = selected
+            // atts[atts.length] = event.target["attribute"].value;
+            // setSelected(atts);
             generateSummary(link, event.target["attribute"].value);
         } else if(replaceConstant) {
-            let link = base_link + "replaceMissing-constant?constant=" + constant;
+            let type = "";
+            if(nominal) {
+                type = "nominal";
+            } else {
+                type = "numeric";
+            }
+            let link = base_link + "replaceMissing-constant?constant=" + constant + "&type=" + type;
             generateSummary(link, null);
         } else if(replaceMean) {
             let link = base_link + "replaceMissing-mean";
             generateSummary(link, null);
         }
-
         event.target['filter'].value = "";
         setRemove(null);
         setReplaceMean(null);
         setReplaceConstant(null);
+        setConstant("");
     }
 
     const callOption = (value) => {
@@ -84,13 +92,33 @@ const Filter = () => {
 
     const generateReplaceConstantOptions = () => {
         setReplaceConstantOptions(
-            <Form.Group>
-                <Form.Label>Constant value</Form.Label>
-                <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>
-                <Form.Text muted>
-                    Enter a constant that will replace all the missing values (nominal values are set to null)
-                </Form.Text>
-            </Form.Group>
+            <div>
+                <Form.Group>
+                    <Form.Select name="type" onChange={event => setNominal(event.target.value === "nominal")}>
+                        <option value="">Select the type of your target attribute</option>
+                        <option value="nominal">Nominal</option>
+                        <option value="numeric">Numeric</option>
+                    </Form.Select>
+                </Form.Group>
+                <br/>
+                {nominal ? (
+                    <Form.Group>
+                        <Form.Label>Constant value</Form.Label>
+                        <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>
+                        <Form.Text muted>
+                            Enter a constant that will replace all the nominal missing values
+                        </Form.Text>
+                    </Form.Group>
+                ): (
+                    <Form.Group>
+                        <Form.Label>Constant value</Form.Label>
+                        <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>
+                        <Form.Text muted>
+                            Enter a constant that will replace all the numeric missing values
+                        </Form.Text>
+                    </Form.Group>
+                )}
+            </div>
         );
     }
 
@@ -129,8 +157,7 @@ const Filter = () => {
                                 <h3><b>The attribute '{attribute}' has been successfully removed!</b></h3>
                             ):null}
                             {replaceConstant ? (
-                                <h3><b>All numerical missing values have been successfully replaced with '{constant}',<br/>
-                                    and all the nominal missing values have been successfully replaced with 'null' </b></h3>
+                                <h3><b>All numerical missing values have been successfully replaced with '{constant}'</b></h3>
                             ):null}
                             {replaceMean ? (
                                 <h3><b>All missing values have been successfully replaced with the mean!</b></h3>
