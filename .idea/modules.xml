@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/P000177CSITCP-Weka-in-AWS-Cloud.iml" filepath="$PROJECT_DIR$/.idea/P000177CSITCP-Weka-in-AWS-Cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/classifyMicroservice/classifyMicroservice.iml" filepath="$PROJECT_DIR$/Backend/classifyMicroservice/classifyMicroservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/clusterMicroservice/clusterMicroservice.iml" filepath="$PROJECT_DIR$/Backend/clusterMicroservice/clusterMicroservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend/filterMicroservice/filterMicroservice.iml" filepath="$PROJECT_DIR$/Backend/filterMicroservice/filterMicroservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/Backend/loadDataMicroservice/loadDataMicroservice.iml" filepath="$PROJECT_DIR$/Backend/loadDataMicroservice/loadDataMicroservice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/weka/weka.iml" filepath="$PROJECT_DIR$/weka/weka.iml" />
     </modules>
   </component>
 </project>
