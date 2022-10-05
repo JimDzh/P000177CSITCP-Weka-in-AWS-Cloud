@@ -10,8 +10,8 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Classify from "./Pages/Classify";
 import Preprocess from "./Pages/Preprocess";
-import Cluster from "./Pages/Cluster"
-import Help from "./Pages/Help"
+import Cluster from "./Pages/Cluster";
+import Help from "./Pages/Help";
 
 // Main component
 const App = () => {
