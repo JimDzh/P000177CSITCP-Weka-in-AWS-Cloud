@@ -22,6 +22,7 @@ public class ClassifyController {
     @PostMapping("/setFilename")
     public void setFileName(String fileName) {
         this.fileName = fileName;
+        classifyService.setFilePath("./Datasets/" + fileName);
     }
 
 
@@ -34,13 +35,13 @@ public class ClassifyController {
         try {
             switch (algorithm) {
                 case "NaiveBayes":
-                    summary = classifyService.naiveBayes("./Datasets/"+ this.fileName, percentage);
+                    summary = classifyService.naiveBayes(percentage);
                     break;
                 case "ZeroR":
-                    summary = classifyService.zeroR("./Datasets/"+ this.fileName, percentage);
+                    summary = classifyService.zeroR(percentage);
                     break;
                 case "Logistic":
-                    summary = classifyService.logistic("./Datasets/"+ this.fileName, percentage);
+                    summary = classifyService.logistic(percentage);
                     break;
             }
         } catch (Exception e) {

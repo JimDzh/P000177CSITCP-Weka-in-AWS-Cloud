@@ -9,10 +9,7 @@ import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;
 import weka.filters.unsupervised.attribute.ReplaceMissingValues;
 import weka.filters.unsupervised.attribute.ReplaceMissingWithUserConstant;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,13 +18,14 @@ import java.util.List;
 @Service
 public class FilterService {
 
+//    private String newFilePath;
     private String filePath;
 
     // Remove selected attribute based on user input
-    public List<String> removeAttribute (String input, String filePath) {
+    public List<String> removeAttribute (String input) {
         Instances newData;
         try {
-            Instances dataset = loadDataSet(filePath);
+            Instances dataset = loadDataSet(this.filePath);
             //delete an Attribute
             Attribute target = dataset.attribute(input);
             String target_index = String.valueOf(target.index() + 1);
@@ -42,7 +40,9 @@ public class FilterService {
             remove.setInputFormat(dataset);
             //apply the filter
             newData = Filter.useFilter(dataset, remove);
-            boolean saved = saveData(newData, filePath);
+
+            String newPath = getNewFilePath(this.filePath, "RemoveAttr");
+            boolean saved = saveData(newData, newPath);
 
             if(saved) {
                 return createSummaryString(newData);
@@ -58,27 +58,30 @@ public class FilterService {
 
 
     // Replace missing value with constant
-    public List<String> replaceMissingWithConstant (String input, String filePath) {
+    public List<String> replaceMissingWithConstant (String input, String type) {
 
         try {
             //create NonSparseToSparse object to save in sparse ARFF format
             ReplaceMissingWithUserConstant sp = new ReplaceMissingWithUserConstant();
             //specify the dataset
-            Instances dataset = loadDataSet(filePath);
-//            String attributeType = getAttributeType(dataset, input);
+            Instances dataset = loadDataSet(this.filePath);
 
-//            if(attributeType.equals("num")) {
-//                sp.setNumericReplacementValue(input);    // for numerical attribute
-//            } else {
+            if(type.equals("numeric")) {
+                List<String> attributes = getAttributes("numeric");
+                String attribute_string = attributes.toString();
+                attribute_string = attribute_string.substring(1,attribute_string.length()-1);
+                sp.setAttributes(attribute_string);
+                sp.setNumericReplacementValue(input);
+            }
+//            else {
 //                sp.setNominalStringReplacementValue(input);    // for nominal attribute
 //            }
 
-            sp.setNumericReplacementValue(input);    // for numerical attribute
-            sp.setNominalStringReplacementValue("null");    // for nominal attribute
             sp.setInputFormat(dataset);
             //apply
             Instances newData = Filter.useFilter(dataset, sp);
-            saveData(newData, filePath);
+            String newPath = getNewFilePath(this.filePath, "ReplaceConst_" + type);
+            saveData(newData, newPath);
 
             List<String> summary = createSummaryString(newData);
             return summary;
@@ -90,18 +93,19 @@ public class FilterService {
 
 
     //Replace missing value with mean
-    public List<String> replaceMissingValueMean (String filePath) {
+    public List<String> replaceMissingValueMean () {
 
         try {
             //create NonSparseToSparse object to save in sparse ARFF format
             ReplaceMissingValues sp = new ReplaceMissingValues();
             //specify the dataset
-            Instances dataset = loadDataSet(filePath);
+            Instances dataset = loadDataSet(this.filePath);
             sp.setInputFormat(dataset);
             //apply
             sp.setIgnoreClass(true);
             Instances newData = Filter.useFilter(dataset, sp);
-            saveData(newData, filePath);
+            String newPath = getNewFilePath(this.filePath, "ReplaceMean");
+            saveData(newData, newPath);
 
             List<String> summary = createSummaryString(newData);
             return summary;
@@ -112,20 +116,44 @@ public class FilterService {
     }
 
 
-    public List<String> getAttributes(String filePath) {
-        Instances dataset = loadDataSet(filePath);
+    public List<String> getAttributes(String type) {
+        Instances dataset = loadDataSet(this.filePath);
         List<String> attributes = new ArrayList<>();
         for(int i=0; i<dataset.numAttributes(); i++) {
             String name = dataset.attribute(i).name();
-            attributes.add(name);
+            Attribute attribute = dataset.attribute(i);
+            String attribute_type = attribute.typeToString(attribute);
+//            System.out.println(attribute.typeToString(attribute));
+            if(!type.equals("")) {
+                if(attribute_type.equals(type)) {
+                    attributes.add(name);
+                }
+            } else {
+                attributes.add(name);
+            }
         }
         return attributes;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
 
     // HELPER METHODS ---------------------------------------------------------------------------------------------------------
 
-    public List<String> createSummaryString(Instances dataset) {
+    private String getNewFilePath(String oldFilePath, String method) {
+        String old_path = oldFilePath.substring(0,oldFilePath.length()-5);
+        String newPath = old_path + method + ".arff";
+        int count = 0;
+        while(new File(newPath).isFile()) {
+            count++;
+            newPath = old_path + method + String.valueOf(count) + ".arff";
+        }
+        return newPath;
+    }
+
+    private List<String> createSummaryString(Instances dataset) {
         List<String> final_summary = new ArrayList<String>();
         try{
             List<String> ls = new ArrayList<String>(Arrays.asList(dataset.toSummaryString().split("\n")));
@@ -142,7 +170,7 @@ public class FilterService {
         return final_summary;
     }
 
-    public Instances loadDataSet(String filePath) {
+    private Instances loadDataSet(String filePath) {
         try {
             //load dataset
             ConverterUtils.DataSource source = new ConverterUtils.DataSource(filePath);
@@ -154,7 +182,7 @@ public class FilterService {
         return null;
     }
 
-    public boolean saveData(Instances instances, String filePath) {
+    private boolean saveData(Instances instances, String filePath) {
         try {
             ArffSaver saver = new ArffSaver();
             saver.setInstances(instances);
@@ -167,10 +195,10 @@ public class FilterService {
         }
     }
 
-    public String getAttributeType(Instances instances, String attributeName) {
-        Attribute attribute = instances.attribute(attributeName);
-        String attributeType = attribute.typeToString(attribute);
-        return attributeType;
-    }
+//    private String getAttributeType(Instances instances, String attributeName) {
+//        Attribute attribute = instances.attribute(attributeName);
+//        String attributeType = attribute.typeToString(attribute);
+//        return attributeType;
+//    }
 
 }

@@ -12,10 +12,11 @@ public class FilterMicroserviceApplication {
 
 //		try {
 //			FilterService f = new FilterService();
-//			List<String> s = f.removeAttribute("LastName", "./Datasets/sample.arff");
-//			for(String r: s) {
-//				System.out.println(r);
-//			}
+//			f.setFilePath("./Datasets/testReplaceConstant.arff");
+//			List<String> s = f.replaceMissingWithConstant("2", "numeric");
+////			for(String r: s) {
+////				System.out.println(r);
+////			}
 //		} catch(Exception e) {
 //			System.out.println(e);
 //		}

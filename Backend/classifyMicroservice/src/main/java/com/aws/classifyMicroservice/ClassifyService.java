@@ -17,13 +17,14 @@ public class ClassifyService {
 
     private List<List<String>> matrix;
     private List<List<String>> details;
+    private String filePath;
 
 
-    public String naiveBayes(String splitFilePath, String trainPercentage) throws Exception {
+    public String naiveBayes(String trainPercentage) throws Exception {
 
         if (tpInputValid(trainPercentage)) { // if input is valid
             double sanitizedInputTP = Double.parseDouble(trainPercentage);
-            List<Instances> trainAndTest = splitDataset(splitFilePath,
+            List<Instances> trainAndTest = splitDataset(this.filePath,
                     sanitizedInputTP);
             Instances train = trainAndTest.get(0);
             Instances test = trainAndTest.get(1);
@@ -38,7 +39,7 @@ public class ClassifyService {
 
             generateDetailsTable(eval);
             generateConfusionMatrix(eval, target);
-            String result = generateResultString(naiveBayes, null, null, eval, splitFilePath, trainPercentage);
+            String result = generateResultString(naiveBayes, null, null, eval, trainPercentage);
             return result;
         } else { // if input is invalid
             return "Input should not be empty and percentage must be a number" +
@@ -46,10 +47,10 @@ public class ClassifyService {
         }
     }
 
-    public String zeroR(String splitFilePath, String trainPercentage) throws Exception {
+    public String zeroR(String trainPercentage) throws Exception {
         if (tpInputValid(trainPercentage)) { // if input is valid
             double sanitizedInputTP = Double.parseDouble(trainPercentage);
-            List<Instances> trainAndTest = splitDataset(splitFilePath,
+            List<Instances> trainAndTest = splitDataset(this.filePath,
                     sanitizedInputTP);
             Instances train = trainAndTest.get(0);
             Instances test = trainAndTest.get(1);
@@ -64,7 +65,7 @@ public class ClassifyService {
 
             generateDetailsTable(eval);
             generateConfusionMatrix(eval, target);
-            String result = generateResultString(null, zeroR, null, eval, splitFilePath, trainPercentage);
+            String result = generateResultString(null, zeroR, null, eval, trainPercentage);
 
             return result;
         } else { // if input is invalid
@@ -73,10 +74,10 @@ public class ClassifyService {
         }
     }
 
-    public String logistic(String splitFilePath, String trainPercentage) throws Exception {
+    public String logistic(String trainPercentage) throws Exception {
         if (tpInputValid(trainPercentage)) { // if input is valid
             double sanitizedInputTP = Double.parseDouble(trainPercentage);
-            List<Instances> trainAndTest = splitDataset(splitFilePath,
+            List<Instances> trainAndTest = splitDataset(this.filePath,
                     sanitizedInputTP);
             Instances train = trainAndTest.get(0);
             Instances test = trainAndTest.get(1);
@@ -93,7 +94,7 @@ public class ClassifyService {
 
             generateDetailsTable(eval);
             generateConfusionMatrix(eval, target);
-            String result = generateResultString(null, null, logistic, eval, splitFilePath, trainPercentage);
+            String result = generateResultString(null, null, logistic, eval, trainPercentage);
             return result;
         } else { // if input is invalid
             return "Input should not be empty and percentage must be a number" +
@@ -109,10 +110,13 @@ public class ClassifyService {
         return this.details;
     }
 
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     // HELPER METHODS ---------------------------------------------------------------------------------------------------------
 
-    private String generateResultString(NaiveBayes nb, ZeroR zr, Logistic l, Evaluation eval, String filePath, String trainPercentage) throws Exception {
+    private String generateResultString(NaiveBayes nb, ZeroR zr, Logistic l, Evaluation eval, String trainPercentage) throws Exception {
 
         String scheme = "";
         if (nb != null) {
@@ -125,7 +129,7 @@ public class ClassifyService {
 
         String information = "<h2>Information: </h2><br/>" +
                 "<p><b>Scheme:</b> " + scheme + "</p>" +
-                "<p><b>Predicted attribute:</b> " + getLastAttributeNameType(filePath) + "</p>" +
+                "<p><b>Predicted attribute:</b> " + getLastAttributeNameType(this.filePath) + "</p>" +
                 "<p><b>Mode:</b> " + "Split " + trainPercentage + "% for train, " +
                 (100-Integer.parseInt(trainPercentage)) + "% for test</p>";
 
