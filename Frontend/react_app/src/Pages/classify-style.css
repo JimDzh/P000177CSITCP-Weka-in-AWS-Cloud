@@ -44,6 +44,20 @@ form {
     line-height: 1.2;
     word-spacing: 0.3em;
     font-family: Arial;
+    font-size: 18px;
+}
+
+.cluster-content {
+    margin-bottom: 31em;
+}
+
+.cluster-summary {
+    text-align: left;
+    margin-left: 30em;
+    line-height: 1.2;
+    word-spacing: 0.3em;
+    font-family: Arial;
+    font-size: 18px;
 }
 
 h2 {

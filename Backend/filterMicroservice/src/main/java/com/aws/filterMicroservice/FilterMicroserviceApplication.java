@@ -7,6 +7,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FilterMicroserviceApplication {
 
 	public static void main(String[] args) {
+
+//		try {
+//			FilterService f = new FilterService();
+//			f.removeAttribute("LastName", "./Datasets/sample.arff");
+//		} catch(Exception e) {
+//			System.out.println(e);
+//		}
+
 		SpringApplication.run(FilterMicroserviceApplication.class, args);
 	}
 

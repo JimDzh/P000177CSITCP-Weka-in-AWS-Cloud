@@ -29,7 +29,21 @@ const Home = () => {
             body: formData
         };
 
-        const link = "http://localhost:8082/api/classify/setFilename?fileName=" + fileName;
+        let link = "http://localhost:8082/api/classify/setFilename?fileName=" + fileName;
+        axios.post(link).then(
+            r => {
+                console.log(r.status);
+            }
+        );
+
+        link = "http://localhost:8084/api/cluster/setFilename?fileName=" + fileName;
+        axios.post(link).then(
+            r => {
+                console.log(r.status);
+            }
+        );
+
+        link = "http://localhost:8083/api/filter/setFilename?fileName=" + fileName;
         axios.post(link).then(
             r => {
                 console.log(r.status);
@@ -152,9 +166,7 @@ const Home = () => {
                           {content}
                           {/*<div dangerouslySetInnerHTML={{ __html: content }}/>*/}
                       </div>
-                  ):(
-                      <div></div>
-                  )}
+                  ): null}
               </section>
           </div>
     );

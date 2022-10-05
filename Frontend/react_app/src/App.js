@@ -24,6 +24,7 @@ const App = () => {
             <Route path='/' element={<Home />} />
             <Route path='/preprocess' element={<Preprocess/>} />
             <Route path='/classify' element={<Classify />} />
+            <Route path='/cluster' element={<Cluster />} />
             <Route path='/about' element={<About />} />
             <Route path='*' element={<Error />} />
           </Routes>

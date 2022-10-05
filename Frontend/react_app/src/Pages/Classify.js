@@ -159,16 +159,10 @@ const Classify = () => {
                                     <br/><br/>
                                     {detailsTable}
                                 </div>
-                            ) : (
-                                <div></div>
-                            )}
+                            ) : null}
                         </div>
-                    ):(
-                        <div></div>
-                    )
-                ):(
-                    <div></div>
-                )}
+                    ): null
+                ): null}
             </div>
         </div>
     )
