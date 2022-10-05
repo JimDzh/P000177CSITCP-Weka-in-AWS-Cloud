@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import video from '../Videos/weka_video.mp4';
 import './style.css';
-import {useCookies} from "react-cookie";
+// import {useCookies} from "react-cookie";
 
 // Home component
 const Home = () => {

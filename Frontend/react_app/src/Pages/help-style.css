@@ -1,12 +1,10 @@
 
 .help .helpContent {
     font-size: 20px;
-    padding-left: 500px;
     text-align: center;
-    float: left;
-    width: 50%;
-    /*margin: 20px 0px 0px 0px;*/
-    margin-bottom: 18.6em;
+    margin-top: 2.6em;
+    /*!*margin: 20px 0px 0px 0px;*!*/
+    margin-bottom: 4.6em;
 }
 .help .line {
     clear: both;
@@ -23,17 +21,24 @@
 
 }
 
-.help .content-three ul {
-    list-style-type: square;
+
+.help {
+    min-height: 100vh;
 }
 
-.help .content-three {
-    font-size: 20px;
-    padding-left: 350px;
+/*.help .content-three ul {*/
+/*    display: table;*/
+/*    margin: 0 auto;*/
+
+/*}*/
+
+
+.help .content-three{
+    font-size: 1.1em;
     text-align: left;
     float: left;
-    width: 9%;
-    /*margin: 0px 0px 20px 20px;*/
-    /*margin-bottom: 10em;*/
-    /*display: block;*/
+    width: 20%;
+    margin-left: 230px ;
 }
+
+

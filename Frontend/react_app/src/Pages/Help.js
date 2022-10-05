@@ -16,24 +16,25 @@ const Help = () => {
                     flightless bird with an inquisitive nature. The name is
                     pronounced like "way·kuh"
                     and the bird sounds like
-                    <a href="https://www.youtube.com/shorts/l3AcsjO29Ow">this</a>.
+                    <a href="https://www.youtube.com/shorts/l3AcsjO29Ow"> this </a>.
                 </p>
                 <p>
                     Weka is open source software issued under the
-                    <a href="https://www.gnu.org/licenses/gpl.html" target="_blank">GNU General Public License</a>.
+                    <a href="https://www.gnu.org/licenses/gpl.html" target="_blank"> GNU General Public License </a>.
                 </p>
                 <p>
                     We have put together several
-                    <a href="https://www.cs.waikato.ac.nz/ml/weka/courses.html" target="_blank">free online courses</a>
+                    <a href="https://www.cs.waikato.ac.nz/ml/weka/courses.html" target="_blank"> free online courses </a>
                     that teach machine learning and data mining using Weka. The videos for the courses are available
-                    <a href="https://www.youtube.com/user/WekaMOOC" target="_blank">on Youtube</a>.
+                    <a href="https://www.youtube.com/user/WekaMOOC" target="_blank"> on Youtube </a>.
                 </p>
                 <p>
                     Weka supports
-                    <a href="https://deeplearning.cms.waikato.ac.nz">deep learning</a>!
+                    <a href="https://deeplearning.cms.waikato.ac.nz"> deep learning </a> !
                 </p>
                 <p></p>
             </div>
+
             <div className="line"></div>
 
             <div className="content-three">
