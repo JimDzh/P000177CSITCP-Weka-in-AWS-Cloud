@@ -10,7 +10,7 @@ const Home = () => {
     const [file, setFile] = useState('');
     const [fileName, setFileName] = useState("");
     const [content, setContent] = useState(null);
-    const [cookies, setCookie] = useCookies(['file-name']);
+    // const [name, setName] = useState(getFileName('content', null));
 
     //base end point url
     const FILE_UPLOAD_BASE_ENDPOINT = "http://localhost:8081/api/load-data/";
@@ -25,10 +25,36 @@ const Home = () => {
     //     // }
     // },[content])
 
+    // useEffect(()=>{
+    //     // console.log(getFileName('name', false));
+    //     // const stored = sessionStorage.getItem('content');
+    //     // if(stored) {
+    //     //     console.log(JSON.parse(stored).props[0]);
+    //     // }
+    //     let content = getFileName('content', false);
+    //     if(content) {
+    //         console.log(content);
+    //     }
+    // },[]);
+    //
+    // useEffect(()=>{
+    //     // sessionStorage.setItem('name', JSON.stringify(name));
+    //     sessionStorage.setItem('content', JSON.stringify(content));
+    // },[content]);
+
+    // function getFileName(key, defaultValue) {
+    //     const stored = sessionStorage.getItem(key);
+    //     if (!stored) {
+    //         return defaultValue;
+    //     }
+    //     return JSON.parse(stored);
+    // }
+
     const uploadFileHandler = (event) => {
         setFile(event.target.files[0]);
         setFileName(event.target.files[0].name);
         // setCookie('name', fileName, {path: '/'});
+        // setName(event.target.files[0].name);
     };
 
     const fileSubmitHandler = (event) => {

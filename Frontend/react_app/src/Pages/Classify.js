@@ -132,7 +132,7 @@ const Classify = () => {
                         <Form.Label>Split Percentage</Form.Label>
                         <Form.Control type="text" value={percentage} onChange={event => setPercentage(event.target.value)}/>
                         <Form.Text muted>
-                            Enter the split percentage to split the database into train and test sets
+                            The split percentage will be the training data % and the remainder for testing data %
                         </Form.Text>
                     </Form.Group>
                     <br/>

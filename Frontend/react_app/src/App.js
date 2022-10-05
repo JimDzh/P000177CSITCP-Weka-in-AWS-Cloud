@@ -16,19 +16,16 @@ const App = () => {
   return (
     <div className='routes'>
         <Router>
-          {/* navbar shows in all pages */}
           <Navbar />
-          {/* <Home /> */}
-          {/* <Footer /> */}
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/preprocess' element={<Preprocess/>} />
             <Route path='/classify' element={<Classify />} />
             <Route path='/cluster' element={<Cluster />} />
             <Route path='/about' element={<About />} />
+            <Route path='/help' element={<Help />} />
             <Route path='*' element={<Error />} />
           </Routes>
-          {/* footer can be added here */}
           <Footer />
         </Router>
     </div>
