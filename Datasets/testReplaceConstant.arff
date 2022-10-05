@@ -1,4 +1,4 @@
-@relation 'pima_diabetes-weka.filters.unsupervised.attribute.ReplaceMissingWithUserConstant-Afirst-last-Nnull-R1-Fyyyy-MM-dd\'T\'HH:mm:ss'
+@relation 'pima_diabetes'
 
 @attribute preg numeric
 @attribute plas numeric
@@ -11,7 +11,7 @@
 @attribute class {tested_negative,tested_positive}
 
 @data
-?,85,66,20.525424,0,26.6,0.351,1,tested_negative
+?,?,66,20.525424,0,26.6,0.351,1,tested_negative
 ?,120.936115,66,23,94,28.1,0.167,21,tested_negative
 ?,103,30,38,83,43.3,0.183,33,?
 1,115,70,30,96,34.6,0.529,32,tested_positive
