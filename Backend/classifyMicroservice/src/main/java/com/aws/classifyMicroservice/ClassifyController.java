@@ -62,4 +62,17 @@ public class ClassifyController {
         return classifyService.getDetails();
     }
 
+    public void initialiseClassifyServiceAttribute(){ // for the test purpose
+        this.classifyService = new ClassifyService();
+    }
+
+    public ClassifyService getClassifyService(){
+        return this.classifyService;
+    }
+
+    public String getFileName() { // for the test purpose
+        return this.fileName;
+    }
+
+
 }

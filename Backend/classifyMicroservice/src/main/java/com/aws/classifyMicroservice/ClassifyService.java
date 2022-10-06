@@ -114,6 +114,14 @@ public class ClassifyService {
         this.filePath = filePath;
     }
 
+    public void setMatrix(List<List<String>> matrix) {
+        this.matrix = matrix;
+    }
+
+    public void setDetails(List<List<String>> details) {
+        this.details = details;
+    }
+
     // HELPER METHODS ---------------------------------------------------------------------------------------------------------
 
     private String generateResultString(NaiveBayes nb, ZeroR zr, Logistic l, Evaluation eval, String trainPercentage) throws Exception {
@@ -214,6 +222,7 @@ public class ClassifyService {
 
     private List<Instances> splitDataset(String splitFilePath,
                                          Double trainPercentage) throws Exception {
+
         double sanitizedTrainPercentage = trainPercentage / 100.0;
 
         List<Instances> result = new ArrayList<>();
@@ -242,5 +251,4 @@ public class ClassifyService {
 
         return result;
     }
-
 }
