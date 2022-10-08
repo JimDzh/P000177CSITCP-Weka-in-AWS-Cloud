@@ -102,6 +102,13 @@ const Filter = () => {
                 </Form.Group>
                 <br/>
                 {nominal ? (
+                    // <Form.Group>
+                    //     <Form.Label>Constant value</Form.Label>
+                    //     <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>
+                    //     <Form.Text muted>
+                    //         Enter a constant that will replace all the nominal missing values
+                    //     </Form.Text>
+                    // </Form.Group>
                     <Form.Group>
                         <Form.Label>Constant value</Form.Label>
                         <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>

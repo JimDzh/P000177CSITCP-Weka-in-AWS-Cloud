@@ -13,7 +13,6 @@ const Cluster = () => {
         event.preventDefault();
         setContent(null);
         let link = "http://localhost:8084/api/cluster/getSummary?algorithm=" + algorithm + "&percentage=" + percentage;
-        // let link = "http://localhost:8084/api/cluster/getSummary?algorithm=" + "SimpleKmeans" + "&percentage=" + "80";
         let summary = null;
         axios.get(link)
             .then(res => {
@@ -45,7 +44,7 @@ const Cluster = () => {
                         <Form.Label>Split Percentage</Form.Label>
                         <Form.Control type="text" value={percentage} onChange={event => setPercentage(event.target.value)}/>
                         <Form.Text muted>
-                            Enter the split percentage to split the database into train and test sets
+                            The split percentage will be the training data % and the remainder for testing data %
                         </Form.Text>
                     </Form.Group>
                     <br/>
