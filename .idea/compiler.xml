@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -9,12 +10,14 @@
         <module name="loadDataMicroservice" />
         <module name="weka" />
         <module name="clusterMicroservice" />
+        <module name="filterMicroservice" />
         <module name="classifyMicroservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="classifyMicroservice" target="16" />
       <module name="clusterMicroservice" target="16" />
+      <module name="filterMicroservice" target="18" />
       <module name="loadDataMicroservice" target="16" />
       <module name="weka" target="16" />
     </bytecodeTargetLevel>
