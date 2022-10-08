@@ -11,7 +11,7 @@ public class ClusterMicroserviceApplication {
 
 		ClusterService cs = new ClusterService();
 		try {
-			cs.EMClusterer("./Datasets/segment-challenge.arff", "80");
+			cs.EMClusterer("../../Datasets/segment-challenge.arff", "80");
 		} catch(Exception e) {
 			System.out.println(e);
 		}

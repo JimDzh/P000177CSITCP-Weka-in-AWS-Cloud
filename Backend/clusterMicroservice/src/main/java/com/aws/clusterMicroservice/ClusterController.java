@@ -27,16 +27,28 @@ public class ClusterController {
         try {
             switch (algorithm) {
                 case "SimpleKmeans":
-                    summary = clusterService.SimpleKmeansClusterer("./Datasets/"+ this.fileName, percentage);
+                    summary = clusterService.SimpleKmeansClusterer("../../Datasets/"+ this.fileName, percentage);
                     break;
                 case "EM":
-                    summary = clusterService.EMClusterer("./Datasets/"+ this.fileName, percentage);
+                    summary = clusterService.EMClusterer("../../Datasets/"+ this.fileName, percentage);
                     break;
             }
         } catch (Exception e) {
             System.out.println(e);
         }
         return summary;
+    }
+
+    public void initialiseClusterServiceAttribute(){ // for the test purpose
+        this.clusterService = new ClusterService();
+    }
+
+    public String getFileName() { // for the test purpose
+        return this.fileName;
+    }
+
+    public ClusterService getClusterService(){
+        return this.clusterService;
     }
 
 }
