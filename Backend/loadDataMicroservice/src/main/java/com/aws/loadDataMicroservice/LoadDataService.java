@@ -21,7 +21,7 @@ public class LoadDataService {
     private String fileName = "";
 
     public boolean uploadFile(MultipartFile file) {
-        String folderPath = "../../Datasets/";
+        String folderPath = "/Users/sreshtaa/Desktop/P000177CSITCP/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/";
         // read and write the file to the local folder
         Arrays.asList(file).stream();
         byte[] bytes;
@@ -50,14 +50,14 @@ public class LoadDataService {
         CSVLoader loader = new CSVLoader();
         String newName = fileName.substring(0, fileName.length() - 4) + ".arff";
         try{
-            File csvFile = new File("../../Datasets/" + fileName);
+            File csvFile = new File("./Datasets/" + fileName);
             loader.setSource(csvFile);
             Instances data = loader.getDataSet();
             ArffSaver saver = new ArffSaver();
             saver.setInstances(data);
-            saver.setFile(new File("../../Datasets/" + newName));
+            saver.setFile(new File("./Datasets/" + newName));
             saver.writeBatch();
-            csvFile.delete();
+//            csvFile.delete();
             return true;
         } catch (Exception e) {
             System.out.println(e);
@@ -73,9 +73,9 @@ public class LoadDataService {
         }
 
         try{
-            Instances dataset = new Instances(new BufferedReader(new FileReader("../../Datasets/" + fileName)));
+            Instances dataset = new Instances(new BufferedReader(new FileReader("./Datasets/" + fileName)));
             List<String> ls = new ArrayList<String>(Arrays.asList(dataset.toSummaryString().split("\n")));
-            System.out.println(dataset.toSummaryString());
+//            System.out.println(dataset.toSummaryString());
             List<String> testing = new ArrayList<String>();
             for(String s:ls) {
                 String data = s.replaceAll("(\\s*)/(\\s*)", "\\/");

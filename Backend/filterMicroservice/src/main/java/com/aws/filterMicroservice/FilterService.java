@@ -3,7 +3,6 @@ package com.aws.filterMicroservice;
 import org.springframework.stereotype.Service;
 import weka.core.Attribute;
 import weka.core.AttributeStats;
-import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.ConverterUtils;

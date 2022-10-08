@@ -27,10 +27,10 @@ public class ClusterController {
         try {
             switch (algorithm) {
                 case "SimpleKmeans":
-                    summary = clusterService.SimpleKmeansClusterer("../../Datasets/"+ this.fileName, percentage);
+                    summary = clusterService.SimpleKmeansClusterer("./Datasets/"+ this.fileName, percentage);
                     break;
                 case "EM":
-                    summary = clusterService.EMClusterer("../../Datasets/"+ this.fileName, percentage);
+                    summary = clusterService.EMClusterer("./Datasets/"+ this.fileName, percentage);
                     break;
             }
         } catch (Exception e) {
