@@ -13,10 +13,13 @@ public class FilterMicroserviceApplication {
 //		try {
 //			FilterService f = new FilterService();
 //			f.setFilePath("./Datasets/testReplaceConstant.arff");
-//			List<String> s = f.replaceMissingWithConstant("2", "numeric");
+////			f.getAttributeValues("class");
+////			List<String> s = f.replaceMissingWithConstant("2", "numeric");
 ////			for(String r: s) {
 ////				System.out.println(r);
 ////			}
+//			f.replaceMissingWithConstant("tested_negative", "nominal");
+////			f.replaceMissingWithConstant("2", "numeric");
 //		} catch(Exception e) {
 //			System.out.println(e);
 //		}

@@ -39,4 +39,16 @@ public class ClusterController {
         return summary;
     }
 
+    public void initialiseClusterServiceAttribute(){ // for the test purpose
+        this.clusterService = new ClusterService();
+    }
+
+    public String getFileName() { // for the test purpose
+        return this.fileName;
+    }
+
+    public ClusterService getClusterService(){
+        return this.clusterService;
+    }
+
 }

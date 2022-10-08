@@ -57,7 +57,7 @@ public class LoadDataService {
             saver.setInstances(data);
             saver.setFile(new File("./Datasets/" + newName));
             saver.writeBatch();
-            csvFile.delete();
+//            csvFile.delete();
             return true;
         } catch (Exception e) {
             System.out.println(e);

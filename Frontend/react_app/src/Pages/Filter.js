@@ -1,5 +1,5 @@
 import Home from "./Home";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -14,8 +14,23 @@ const Filter = () => {
     const [replaceConstantOptions, setReplaceConstantOptions] = useState(null);
     const [constant, setConstant] = useState(null);
     const [content, setContent] = useState(null);
-    const [nominal, setNominal] = useState(null);
-    // const [selected, setSelected] = useState([]);
+    const [numeric, setNumeric] = useState(null);
+    const [replaceAttrOptions, setReplaceAttrOptions] = useState(null);
+    const [attrValues, setAttrValues] = useState(null);
+    // const [replaceAttrValue, setReplaceAttrValue] = useState(null);
+    // const [numericOptions, setNumericOptions] = useState(null);
+
+
+    useEffect(()=>{
+        if(numeric === false) {
+            generateReplaceAttrOptions("nominal");
+        } else if(numeric === true){
+            setReplaceAttrOptions(null);
+            setAttrValues(null);
+        }
+        // console.log(numeric);
+    },[numeric])
+
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -24,13 +39,10 @@ const Filter = () => {
 
         if(remove) {
             let link = base_link + "removeAttribute?attribute=" + event.target["attribute"].value;
-            // let atts = selected
-            // atts[atts.length] = event.target["attribute"].value;
-            // setSelected(atts);
             generateSummary(link, event.target["attribute"].value);
         } else if(replaceConstant) {
             let type = "";
-            if(nominal) {
+            if(!numeric) {
                 type = "nominal";
             } else {
                 type = "numeric";
@@ -46,6 +58,7 @@ const Filter = () => {
         setReplaceMean(null);
         setReplaceConstant(null);
         setConstant("");
+        setNumeric(null);
     }
 
     const callOption = (value) => {
@@ -54,6 +67,8 @@ const Filter = () => {
                 setRemove(true);
                 setReplaceMean(null);
                 setReplaceConstant(null);
+                setReplaceAttrOptions(null);
+                setAttrValues(null);
                 // setAttribute(null);
                 generateRemoveOptions();
                 break;
@@ -61,66 +76,115 @@ const Filter = () => {
                 setReplaceConstant(true);
                 setRemove(null);
                 setReplaceMean(null);
-                generateReplaceConstantOptions();
                 break;
             case "replaceMean":
                 setReplaceMean(true);
                 setRemove(null);
                 setReplaceConstant(null);
+                setReplaceAttrOptions(null);
+                setAttrValues(null);
                 break;
         }
     }
 
     const generateRemoveOptions = () => {
-        let link = "http://localhost:8083/api/filter/getAttributes";
+        let type = "";
+        let link = "http://localhost:8083/api/filter/getAttributes?type=" + type;
         let attributes = null;
         axios.get(link)
             .then(res => {
                 attributes = Array.prototype.slice.call(res.data);
                 setRemoveOptions(
-                    <Form.Select name="attribute">
-                        <option value="">Select an attribute you want to remove</option>
-                        {
-                            attributes.map((attribute) => (
-                                <option value={attribute}>{attribute}</option>
-                            ))
-                        }
-                    </Form.Select>
+                    <div>
+                        <Form.Select name="attribute">
+                            <option value="">Select an attribute you want to remove</option>
+                            {
+                                attributes.map((attribute) => (
+                                    <option value={attribute}>{attribute}</option>
+                                ))
+                            }
+                        </Form.Select>
+                        <br/>
+                    </div>
                 );
             })
     }
 
-    const generateReplaceConstantOptions = () => {
-        setReplaceConstantOptions(
-            <div>
-                <Form.Group>
-                    <Form.Select name="type" onChange={event => setNominal(event.target.value === "nominal")}>
-                        <option value="">Select the type of your target attribute</option>
-                        <option value="nominal">Nominal</option>
-                        <option value="numeric">Numeric</option>
-                    </Form.Select>
-                </Form.Group>
-                <br/>
-                {nominal ? (
-                    <Form.Group>
-                        <Form.Label>Constant value</Form.Label>
-                        <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>
-                        <Form.Text muted>
-                            Enter a constant that will replace all the nominal missing values
-                        </Form.Text>
-                    </Form.Group>
-                ): (
-                    <Form.Group>
-                        <Form.Label>Constant value</Form.Label>
-                        <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>
-                        <Form.Text muted>
-                            Enter a constant that will replace all the numeric missing values
-                        </Form.Text>
-                    </Form.Group>
-                )}
-            </div>
-        );
+
+    const generateReplaceAttrOptions = (type) => {
+        let link = "http://localhost:8083/api/filter/getAttributesWithMissingValues?type=" + type;
+        let attributes = null;
+        axios.get(link)
+            .then(res => {
+                attributes = Array.prototype.slice.call(res.data);
+                setReplaceAttrOptions(
+                    <div>
+                        <Form.Select name="replaceAttr" onChange={event => generateAttrValues(event.target.value)}>
+                            <option value="">Select an attribute in which you want to replace missing values</option>
+                            {
+                                attributes.map((attribute) => (
+                                    <option value={attribute}>{attribute}</option>
+                                ))
+                            }
+                        </Form.Select>
+                        <br/>
+                    </div>
+                );
+            })
     }
+
+    const generateAttrValues = (attribute) => {
+        let link = "http://localhost:8083/api/filter/getAttributeValues?attribute=" + attribute;
+        let values = null;
+        axios.get(link)
+            .then(res => {
+                values = Array.prototype.slice.call(res.data);
+                setAttrValues(
+                    <div>
+                        <Form.Select name="attributeValue" onChange={event => setConstant(event.target.value)}>
+                            <option value="">Select a value that will replace missing values in this attribute</option>
+                            {
+                                values.map((value) => (
+                                    <option value={value}>{value}</option>
+                                ))
+                            }
+                        </Form.Select>
+                        <br/>
+                    </div>
+                );
+            })
+    }
+
+    // const generateNumericOptions = () => {
+    //     setNumericOptions(
+    //         <div>
+    //             <Form.Group>
+    //                 <Form.Label>Constant value</Form.Label>
+    //                 <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>
+    //                 <Form.Text muted>
+    //                     Enter a constant that will replace all the numeric missing values
+    //                 </Form.Text>
+    //                 <br/>
+    //             </Form.Group>
+    //             <br/>
+    //         </div>
+    //     );
+    // }
+
+    // const generateReplaceConstantOptions = () => {
+    //     setReplaceConstantOptions(
+    //         <div>
+    //             <Form.Group>
+    //                 <Form.Select name="type" onChange={event => setNumeric(event.target.value === "numeric")}>
+    //                     <option value="">Select the type of attribute you want to replace missing values in</option>
+    //                     <option value="nominal">Nominal</option>
+    //                     <option value="numeric">Numeric</option>
+    //                 </Form.Select>
+    //             </Form.Group>
+    //             <br/>
+    //         </div>
+    //     );
+    // }
 
     const generateSummary = (link, attribute) => {
 
@@ -221,9 +285,35 @@ const Filter = () => {
                         removeOptions
                     ): null}
                     {replaceConstant ? (
-                        replaceConstantOptions
+                        <div>
+                            <Form.Group>
+                                <Form.Select name="type" onChange={event => setNumeric(event.target.value === "numeric")}>
+                                    <option value="">Select the type of attribute you want to replace missing values in</option>
+                                    <option value="nominal">Nominal</option>
+                                    <option value="numeric">Numeric</option>
+                                </Form.Select>
+                            </Form.Group>
+                            <br/>
+                            {numeric ? (
+                                <div>
+                                    <Form.Group>
+                                        <Form.Label>Constant value</Form.Label>
+                                        <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>
+                                        <Form.Text muted>
+                                            Enter a constant that will replace all the numeric missing values
+                                        </Form.Text>
+                                    </Form.Group>
+                                    <br/>
+                                </div>
+                            ):null}
+                        </div>
                     ): null}
-                    <br/>
+                    {replaceAttrOptions ? (
+                        replaceAttrOptions
+                    ) : null}
+                    {attrValues ? (
+                        attrValues
+                    ) : null}
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
