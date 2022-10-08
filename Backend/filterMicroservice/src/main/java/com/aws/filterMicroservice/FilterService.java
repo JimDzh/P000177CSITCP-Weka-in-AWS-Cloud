@@ -2,6 +2,8 @@ package com.aws.filterMicroservice;
 
 import org.springframework.stereotype.Service;
 import weka.core.Attribute;
+import weka.core.AttributeStats;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.ConverterUtils;
@@ -10,9 +12,7 @@ import weka.filters.unsupervised.attribute.Remove;
 import weka.filters.unsupervised.attribute.ReplaceMissingValues;
 import weka.filters.unsupervised.attribute.ReplaceMissingWithUserConstant;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -72,10 +72,13 @@ public class FilterService {
                 attribute_string = attribute_string.substring(1,attribute_string.length()-1);
                 sp.setAttributes(attribute_string);
                 sp.setNumericReplacementValue(input);
+            } else {
+                List<String> attributes = getAttributes("nominal");
+                String attribute_string = attributes.toString();
+                attribute_string = attribute_string.substring(1,attribute_string.length()-1);
+                sp.setAttributes(attribute_string);
+                sp.setNominalStringReplacementValue(input);
             }
-//            else {
-//                sp.setNominalStringReplacementValue(input);    // for nominal attribute
-//            }
 
             sp.setInputFormat(dataset);
             //apply
@@ -133,6 +136,41 @@ public class FilterService {
             }
         }
         return attributes;
+    }
+
+    public List<String> getAttributesWithMissingValues(String type) {
+        Instances dataset = loadDataSet(this.filePath);
+        List<String> attributes = new ArrayList<>();
+        for(int i=0; i<dataset.numAttributes(); i++) {
+            String name = dataset.attribute(i).name();
+            Attribute attribute = dataset.attribute(i);
+            String attribute_type = attribute.typeToString(attribute);
+            if(attribute_type.equals(type)) {
+                AttributeStats stats = dataset.attributeStats(i);
+                if(stats.missingCount > 0) {
+                    attributes.add(name);
+//                    System.out.println(name);
+                }
+            }
+        }
+        return attributes;
+    }
+
+    public List<String> getAttributeValues(String attributeName) {
+        Instances dataset = loadDataSet(this.filePath);
+        List<String> attributeVals = new ArrayList<>();
+        for(int i=0; i<dataset.numAttributes(); i++) {
+            Attribute attribute = dataset.attribute(i);
+            if(attribute.name().equals(attributeName)) {
+                Enumeration<Object> vals = attribute.enumerateValues();
+                List<Object> values = Collections.list(vals);
+                for(int j=0; j<values.size(); j++) {
+                    attributeVals.add(values.get(j).toString());
+//                    System.out.println(values.get(j).toString());
+                }
+            }
+        }
+        return attributeVals;
     }
 
     public void setFilePath(String filePath) {

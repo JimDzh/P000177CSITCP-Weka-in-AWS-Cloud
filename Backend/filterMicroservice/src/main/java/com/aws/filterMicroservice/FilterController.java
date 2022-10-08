@@ -44,9 +44,20 @@ public class FilterController {
 
     // link: http://localhost:8083/api/filter/getAttributes
     @GetMapping("/getAttributes")
-    public List<String> getAttributes() {
-        return filterService.getAttributes("");
+    public List<String> getAttributes(String type) {
+        return filterService.getAttributes(type);
     }
 
+    // link: http://localhost:8083/api/filter/getAttributesWithMissingValues
+    @GetMapping("/getAttributesWithMissingValues")
+    public List<String> getAttributesWithMissingValues(String type) {
+        return filterService.getAttributesWithMissingValues(type);
+    }
+
+    // link: http://localhost:8083/api/filter/getAttributeValues
+    @GetMapping("/getAttributeValues")
+    public List<String> getAttributeValues(String attribute) {
+        return filterService.getAttributeValues(attribute);
+    }
 
 }
