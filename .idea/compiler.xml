@@ -8,15 +8,21 @@
         <outputRelativeToContentRoot value="true" />
         <module name="loadDataMicroservice" />
         <module name="weka" />
+        <module name="clusterMicroservice" />
+        <module name="classifyMicroservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="classifyMicroservice" target="16" />
+      <module name="clusterMicroservice" target="16" />
       <module name="loadDataMicroservice" target="16" />
       <module name="weka" target="16" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="classifyMicroservice" options="-parameters" />
+      <module name="clusterMicroservice" options="-parameters" />
       <module name="loadDataMicroservice" options="-parameters" />
       <module name="weka" options="-parameters" />
     </option>
