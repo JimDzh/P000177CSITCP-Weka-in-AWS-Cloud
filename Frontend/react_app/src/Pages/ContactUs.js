@@ -5,24 +5,45 @@ const ContactUs = () => {
     return(
         <div className="contact">
             <div className="container">
-                <form action="">
-                    <label>
-                        Name
-                        <input type="text" id="name" name="userName" placeholder="Your name.."  />
-                    </label>
-                    <br/>
-                    <label>
-                        Email
-                        <input type="text" id="email" name="userEmail" placeholder="Your email.." />
-                    </label>
-                    <br/>
-                    <label>
-                        Subject
-                        <textarea id="message" name="userMessage" placeholder="Write something.." style={{height: "200px"}}></textarea>
-                    </label>
-                    <br/>
-                    <input type="submit" value="Submit" />
-                </form>
+            <h1> Contact Us</h1>
+            <p> Get in touch with us!</p>
+                <div className="contact-box">
+                    <div className="contact-left">
+                            <h3>Send your message</h3>
+                            <form>
+                                <div className="input-row">
+                                    <div className="input-group">
+                                        <label> Name </label>
+                                        <input type="text" id="name" name="userName" placeholder="Your name.."  />
+                                    </div>
+                                    <div className="input-group">
+                                        <label> Email </label>
+                                        <input type="text" id="email" name="userEmail" placeholder="Your email.." />
+                                    </div>
+                                </div>
+                                <label> Message </label>
+                                <textarea rows="5" placeholder="your message"></textarea>
+                                <input type="submit" value="Submit" />
+                            </form>
+                    </div>
+                    <div className="contact-right">
+                            <h3>Our details</h3>
+                            <table>
+                                <tr>
+                                    <td>EMAIL:</td>
+                                    <td>weka.rmit@rmit.com</td>
+                                </tr>
+                                <tr>
+                                    <td>PHONE:</td>
+                                    <td>+61 123 456 789</td>
+                                </tr>
+                                <tr>
+                                    <td>ADDRESS:</td>
+                                    <td>124 La Trobe St, Melbourne VIC 3000</td>
+                                </tr>
+                            </table>
+                    </div>
+                </div>
             </div>
 
             <h2 style={{textAlign: "center",marginBottom: "16px"}}>Meet Our Team!</h2>
@@ -51,9 +72,7 @@ const ContactUs = () => {
                 <div style={{float: "left", width: "20%"}}>
                     <h4>Zehu Liu</h4>
                     <p>s3845938@student.rmit.edu.au <br/> Front-End and Back-End Developer </p>
-
                 </div>
-
             </div>
         </div>
     );
