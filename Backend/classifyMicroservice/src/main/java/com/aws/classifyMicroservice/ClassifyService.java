@@ -114,11 +114,11 @@ public class ClassifyService {
         this.filePath = filePath;
     }
 
-    public void setMatrix(List<List<String>> matrix) {
+    public void setMatrix(List<List<String>> matrix) { // for the test purpose
         this.matrix = matrix;
     }
 
-    public void setDetails(List<List<String>> details) {
+    public void setDetails(List<List<String>> details) { // for the test purpose
         this.details = details;
     }
 
