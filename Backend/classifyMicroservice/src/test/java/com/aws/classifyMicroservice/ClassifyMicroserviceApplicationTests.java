@@ -8,29 +8,33 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * @author Yitao Ma
+ * */
 @SpringBootTest
 class ClassifyMicroserviceApplicationTests {
     private static ClassifyService classifyService;
 
     @BeforeAll
-    public static void initialise() { // initialise the controller and service
+    public static void initialise() { // this method will run before all tests only once
         classifyService = new ClassifyService();// for directly test the
         // service class
     }
 
     @AfterEach
-    public void reset() {
+    public void reset() { // this method will run after each test
+        // aim to reset related attributes to default after each test so that each test will not affect each other
         classifyService.setFilePath("");
         classifyService.setMatrix(null);
         classifyService.setDetails(null);
     }
 
     // ----- below test classifyService class's methods -----
-
+    // Method name meaning: method name + expected result + test condition
     // NaiveBayes
     @Test
     void naiveBayes_CorrectSummary_IfNaiveBayesInvokedCorrectly() throws Exception {
+        // using my own absolute path just for test purpose. Note: Using relative path is not working here
         String fileName = "/Users/ethan/Desktop/Programming " +
                 "project/Gthub-RepoNew/P000177CSITCP-Weka-in-AWS-Cloud" +
                 "/Datasets/heart-clean.arff";
