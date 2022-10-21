@@ -28,12 +28,12 @@ public class ClassifyService {
                     sanitizedInputTP);
             Instances train = trainAndTest.get(0);
             Instances test = trainAndTest.get(1);
-            Attribute target = test.attribute(train.numAttributes()-1);
+            Attribute target = test.attribute(train.numAttributes()-1); // last attribute in the dataset
 
             //build model
             NaiveBayes naiveBayes = new NaiveBayes();
             naiveBayes.buildClassifier(train);
-
+            // evaluate model
             Evaluation eval = new Evaluation(train);
             eval.evaluateModel(naiveBayes, test);
 
@@ -114,18 +114,18 @@ public class ClassifyService {
         this.filePath = filePath;
     }
 
-    public void setMatrix(List<List<String>> matrix) {
+    public void setMatrix(List<List<String>> matrix) { // Actual testing is not here, please go to final-test branch, not in this react branch
         this.matrix = matrix;
     }
 
-    public void setDetails(List<List<String>> details) {
+    public void setDetails(List<List<String>> details) { // Actual testing is not here, please go to final-test branch, not in this react branch
         this.details = details;
     }
 
     // HELPER METHODS ---------------------------------------------------------------------------------------------------------
 
     private String generateResultString(NaiveBayes nb, ZeroR zr, Logistic l, Evaluation eval, String trainPercentage) throws Exception {
-
+        // need this method because the result string returned from Weka API is not going to be well formatted if pass directly to the front end.
         String scheme = "";
         if (nb != null) {
             scheme = nb.getClass().getName();
@@ -153,7 +153,7 @@ public class ClassifyService {
         return result;
     }
 
-    private void generateDetailsTable(Evaluation eval) throws Exception {
+    private void generateDetailsTable(Evaluation eval) throws Exception { // sanitize Weka API result string
         this.details = new ArrayList<>();
         String details = eval.toClassDetailsString();
         List<String> rows = new ArrayList<>(Arrays.asList(details.split("\n")));
@@ -166,7 +166,7 @@ public class ClassifyService {
         }
     }
 
-    private void generateConfusionMatrix(Evaluation eval, Attribute target) {
+    private void generateConfusionMatrix(Evaluation eval, Attribute target) {// sanitize Weka API result string
         this.matrix = new ArrayList<>();
         double[][] double_matrix = eval.confusionMatrix();
         List<String> labels = new ArrayList<>();
