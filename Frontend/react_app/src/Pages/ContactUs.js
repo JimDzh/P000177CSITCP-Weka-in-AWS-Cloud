@@ -1,6 +1,7 @@
 import React from 'react';
 import './contact-style.css';
 
+// ContactUS page component
 const ContactUs = () => {
     return(
         <div className="contact">
@@ -24,8 +25,7 @@ const ContactUs = () => {
                     <input type="submit" value="Submit" />
                 </form>
             </div>
-
-            <h2 style={{textAlign: "center",marginBottom: "16px"}}>Meet Our Team!</h2>
+            <h2 style={{textAlign: "center",marginBottom: "16px"}}>Meet Our Team!</h2><br/><br/>
             <div style={{textAlign: "center"}}>
                 <div style={{float: "left", width: "20%"}}>
                     <h4>Zhihong Deng</h4>
@@ -53,7 +53,7 @@ const ContactUs = () => {
                     <p>s3845938@student.rmit.edu.au <br/> Front-End and Back-End Developer </p>
 
                 </div>
-
+                <br/><br/>
             </div>
         </div>
     );

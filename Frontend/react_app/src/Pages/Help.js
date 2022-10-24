@@ -1,6 +1,7 @@
 import React from 'react';
 import './help-style.css';
 
+// Help page component
 const Help = () => {
     return(
         <div className="help">

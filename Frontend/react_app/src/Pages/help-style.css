@@ -1,11 +1,10 @@
-
 .help .helpContent {
     font-size: 20px;
     text-align: center;
     margin-top: 2.6em;
-    /*!*margin: 20px 0px 0px 0px;*!*/
     margin-bottom: 4em;
 }
+
 .help .line {
     clear: both;
     border-bottom: 2px solid #ddd;
@@ -20,17 +19,9 @@
     margin-inline-end: 0px;
 }
 
-
 .help {
     min-height: 100vh;
 }
-
-/*.help .content-three ul {*/
-/*    display: table;*/
-/*    margin: 0 auto;*/
-
-/*}*/
-
 
 .help .content-three{
     font-size: 1.1em;
@@ -39,5 +30,3 @@
     width: 20%;
     margin-left: 230px ;
 }
-
-

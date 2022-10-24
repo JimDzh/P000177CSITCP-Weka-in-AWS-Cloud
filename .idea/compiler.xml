@@ -15,10 +15,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="classifyMicroservice" target="16" />
-      <module name="clusterMicroservice" target="16" />
-      <module name="filterMicroservice" target="18" />
-      <module name="loadDataMicroservice" target="16" />
+      <module name="classifyMicroservice" target="18" />
+      <module name="clusterMicroservice" target="18" />
+      <module name="filterMicroservice" target="16" />
+      <module name="loadDataMicroservice" target="18" />
       <module name="weka" target="16" />
     </bytecodeTargetLevel>
   </component>
@@ -26,6 +26,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="classifyMicroservice" options="-parameters" />
       <module name="clusterMicroservice" options="-parameters" />
+      <module name="filterMicroservice" options="-parameters" />
       <module name="loadDataMicroservice" options="-parameters" />
       <module name="weka" options="-parameters" />
     </option>

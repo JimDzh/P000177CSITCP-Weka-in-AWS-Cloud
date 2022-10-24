@@ -1,26 +1,30 @@
-import Home from "./Home";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-
+// Filter page component
 const Filter = () => {
 
+    // states to know which option has been selected
     const [remove, setRemove] = useState(null);
     const [replaceConstant, setReplaceConstant] = useState(null);
     const [replaceMean, setReplaceMean] = useState(null);
+    // state that stores options of 'Remove an attribute'
     const [removeOptions, setRemoveOptions] = useState(null);
-    const [replaceConstantOptions, setReplaceConstantOptions] = useState(null);
+    // state that stores the constant to replace missing values with
     const [constant, setConstant] = useState(null);
+    // state that stores data summary
     const [content, setContent] = useState(null);
+    // state to know if the attribute being replaced is nominal or numeric
     const [numeric, setNumeric] = useState(null);
+    // state that stores options of 'Replace all missing values with a constant'
+    // or 'Replace all missing values with mean'
     const [replaceAttrOptions, setReplaceAttrOptions] = useState(null);
+    // state that stores the values of an attribute that has been selected
     const [attrValues, setAttrValues] = useState(null);
-    // const [replaceAttrValue, setReplaceAttrValue] = useState(null);
-    // const [numericOptions, setNumericOptions] = useState(null);
 
-
+    // triggers every time the state 'numeric' is triggered
     useEffect(()=>{
         if(numeric === false) {
             generateReplaceAttrOptions("nominal");
@@ -28,28 +32,29 @@ const Filter = () => {
             setReplaceAttrOptions(null);
             setAttrValues(null);
         }
-        // console.log(numeric);
     },[numeric])
 
-
+    // form submit handler
     const submitHandler = (event) => {
         event.preventDefault();
         setContent(null);
         let base_link = "http://localhost:8083/api/filter/";
-
+        // if option selected was 'Remove an attribute'
         if(remove) {
             let link = base_link + "removeAttribute?attribute=" + event.target["attribute"].value;
             generateSummary(link, event.target["attribute"].value);
         } else if(replaceConstant) {
+            // if option selected was 'Replace all missing values with a constant'
             let type = "";
             if(!numeric) {
-                type = "nominal";
+                type = "nominal";       // if attribute is nominal
             } else {
-                type = "numeric";
+                type = "numeric";       // if attribute is numeric
             }
             let link = base_link + "replaceMissing-constant?constant=" + constant + "&type=" + type;
             generateSummary(link, null);
         } else if(replaceMean) {
+            // if option selected was 'Replace all missing values with mean'
             let link = base_link + "replaceMissing-mean";
             generateSummary(link, null);
         }
@@ -61,6 +66,9 @@ const Filter = () => {
         setNumeric(null);
     }
 
+    // triggers when an option is selected for filter
+    // helps generate further options and
+    // cleans the states that are not related to the option selected
     const callOption = (value) => {
         switch(value) {
             case "remove":
@@ -69,7 +77,6 @@ const Filter = () => {
                 setReplaceConstant(null);
                 setReplaceAttrOptions(null);
                 setAttrValues(null);
-                // setAttribute(null);
                 generateRemoveOptions();
                 break;
             case "replaceConstant":
@@ -87,7 +94,10 @@ const Filter = () => {
         }
     }
 
+    // options for 'Remove an attribute'
     const generateRemoveOptions = () => {
+        // fetching all attributes of dataset and
+        // displaying them in the form
         let type = "";
         let link = "http://localhost:8083/api/filter/getAttributes?type=" + type;
         let attributes = null;
@@ -110,7 +120,7 @@ const Filter = () => {
             })
     }
 
-
+    // fetches attributes according to their type
     const generateReplaceAttrOptions = (type) => {
         let link = "http://localhost:8083/api/filter/getAttributesWithMissingValues?type=" + type;
         let attributes = null;
@@ -133,6 +143,7 @@ const Filter = () => {
             })
     }
 
+    // fetches all unique values of a given attribute
     const generateAttrValues = (attribute) => {
         let link = "http://localhost:8083/api/filter/getAttributeValues?attribute=" + attribute;
         let values = null;
@@ -155,39 +166,8 @@ const Filter = () => {
             })
     }
 
-    // const generateNumericOptions = () => {
-    //     setNumericOptions(
-    //         <div>
-    //             <Form.Group>
-    //                 <Form.Label>Constant value</Form.Label>
-    //                 <Form.Control type="text" value={constant} onChange={event => setConstant(event.target.value)}/>
-    //                 <Form.Text muted>
-    //                     Enter a constant that will replace all the numeric missing values
-    //                 </Form.Text>
-    //                 <br/>
-    //             </Form.Group>
-    //             <br/>
-    //         </div>
-    //     );
-    // }
-
-    // const generateReplaceConstantOptions = () => {
-    //     setReplaceConstantOptions(
-    //         <div>
-    //             <Form.Group>
-    //                 <Form.Select name="type" onChange={event => setNumeric(event.target.value === "numeric")}>
-    //                     <option value="">Select the type of attribute you want to replace missing values in</option>
-    //                     <option value="nominal">Nominal</option>
-    //                     <option value="numeric">Numeric</option>
-    //                 </Form.Select>
-    //             </Form.Group>
-    //             <br/>
-    //         </div>
-    //     );
-    // }
-
+    // fetches and generates summary after performing an action
     const generateSummary = (link, attribute) => {
-
         let summary = null;
         axios.post(link)
             .then(res => {
@@ -214,7 +194,7 @@ const Filter = () => {
                             }
                         }
                     }
-
+                    // setting different messages according to the type of option chosen
                     setContent(
                         <div>
                             {remove ? (
@@ -281,6 +261,8 @@ const Filter = () => {
                         </Form.Select>
                     </Form.Group>
                     <br/>
+
+                    {/* DISPLAYING FURTHER OPTIONS DEPENDING ON THE FILTER SELECTED */}
                     {remove ? (
                         removeOptions
                     ): null}

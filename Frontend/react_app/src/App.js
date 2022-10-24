@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './Pages/style.css';
-
 import About from "./Pages/About";
 import Home from "./Pages/Home";
 import Error from "./Pages/Error"
@@ -13,10 +12,11 @@ import Help from "./Pages/Help";
 import ContactUs from "./Pages/ContactUs";
 import Filter from "./Pages/Filter";
 
-// Main component
+// Main app component
 const App = () => {
   return (
     <div className='routes'>
+        {/* configuring component routes for navigation */}
         <Router>
           <Navbar />
           <Routes>

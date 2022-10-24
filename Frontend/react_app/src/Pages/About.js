@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-// About component
+// AboutUs page component
 const About = () => {
   return (
     <div>
