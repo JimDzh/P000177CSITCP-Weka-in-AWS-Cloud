@@ -8,7 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+/**
+ * @author Yitao Ma
+ * */
 
+/**NOTE: Actual testing is not here, please go to final-test branch, not in this react branch*/
 @SpringBootTest
 class ClassifyMicroserviceApplicationTests {
     private static ClassifyController classifyController;

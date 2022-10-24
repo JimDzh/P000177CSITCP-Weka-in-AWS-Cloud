@@ -63,14 +63,17 @@ public class ClassifyController {
     }
 
     public void initialiseClassifyServiceAttribute(){ // for the test purpose
+        // Actual testing is not here, please go to final-test branch, not in this react branch
         this.classifyService = new ClassifyService();
     }
 
     public ClassifyService getClassifyService(){
+        // Actual testing is not here, please go to final-test branch, not in this react branch
         return this.classifyService;
     }
 
     public String getFileName() { // for the test purpose
+        // Actual testing is not here, please go to final-test branch, not in this react branch
         return this.fileName;
     }
 
