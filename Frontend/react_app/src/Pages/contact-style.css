@@ -3,7 +3,7 @@
 .contact input[type=submit] {
     background-color: rgb(55, 41, 185);
     color: white;
-    padding: 12px 20px;
+    padding: 30px 40px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -14,7 +14,7 @@
 }
 
 .contact {
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -36,21 +36,21 @@
 
 .contact form{
     width: 100%;
-    margin: 50px auto;
+    margin: 10px auto;
 }
 
 .contact .contact-right{
     flex-basis: 40%;
-    padding: 40px;
+    padding: 30px;
     background: #ffffff;
+    margin-left: 5em;
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 3em;
 }
 
 .contact h1{
     margin-bottom: 10px;
-}
-
-.contact .container p{
-    /*margin-bottom: 40px;*/
 }
 
 .contact .input-row{
@@ -89,13 +89,12 @@
     display: block;
 }
 
-.contact tr td{
-    text-align: left;
-    vertical-align: middle;
-
+.contact .container input, textarea {
+    padding: 0.4em;
+    border-radius: 5px;
+    margin-top: 0.5em;
 }
 
-.contact table{
-    width: 100%;
-    margin: 50px auto;
+.contact .team p {
+    font-size: 18px;
 }

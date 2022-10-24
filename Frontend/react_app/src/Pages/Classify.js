@@ -127,6 +127,7 @@ const Classify = () => {
                             </Form.Select>
                         ):(
                             <Form.Select name="algorithm" onChange={event => setAlgorithm(event.target.value)}>
+                                <option value="">Select an algorithm for classification</option>
                                 <option>No options available</option>
                             </Form.Select>
                         )}

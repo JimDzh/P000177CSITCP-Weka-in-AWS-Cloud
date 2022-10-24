@@ -6,48 +6,38 @@ const ContactUs = () => {
     return(
         <div className="contact">
             <div className="container">
-            <h1> Contact Us</h1>
-            <p> Get in touch with us!</p>
+            <br/>
                 <div className="contact-box">
-                    <div className="contact-left">
-                            <h3>Send your message</h3>
-                            <form>
-                                <div className="input-row">
-                                    <div className="input-group">
-                                        <label> Name </label>
-                                        <input type="text" id="name" name="userName" placeholder="Your name.."  />
-                                    </div>
-                                    <div className="input-group">
-                                        <label> Email </label>
-                                        <input type="text" id="email" name="userEmail" placeholder="Your email.." />
-                                    </div>
-                                </div>
-                                <label> Message </label>
-                                <textarea rows="5" placeholder="your message"></textarea>
-                                <input type="submit" value="Submit" />
-                            </form>
+                    <div className="container">
+                        <form action="">
+                            <label>
+                                Name
+                                <input type="text" id="name" name="userName" placeholder="Your name.."  />
+                            </label>
+                            <br/>
+                            <label>
+                                Email
+                                <input type="text" id="email" name="userEmail" placeholder="Your email.." />
+                            </label>
+                            <br/>
+                            <label>
+                                Subject
+                                <textarea id="message" name="userMessage" placeholder="Write something.." style={{height: "200px"}}></textarea>
+                            </label>
+                            <br/>
+                            <input type="submit" value="Submit" />
+                        </form>
                     </div>
                     <div className="contact-right">
-                            <h3>Our details</h3>
-                            <table>
-                                <tr>
-                                    <td>EMAIL:</td>
-                                    <td>weka.rmit@rmit.com</td>
-                                </tr>
-                                <tr>
-                                    <td>PHONE:</td>
-                                    <td>+61 123 456 789</td>
-                                </tr>
-                                <tr>
-                                    <td>ADDRESS:</td>
-                                    <td>124 La Trobe St, Melbourne VIC 3000</td>
-                                </tr>
-                            </table>
+                            <h3 style={{color:"rgb(55, 41, 185)", marginBottom:"1em"}}>Our details</h3>
+                            <p>EMAIL:<br/>weka.rmit@rmit.com</p>
+                            <p>PHONE:<br/>+61 123 456 789</p>
+                            <p>ADDRESS:<br/>124 La Trobe St, Melbourne VIC 3000</p>
                     </div>
                 </div>
             </div>
             <h2 style={{textAlign: "center",marginBottom: "16px"}}>Meet Our Team!</h2><br/><br/>
-            <div style={{textAlign: "center"}}>
+            <div className="team" style={{textAlign: "center"}}>
                 <div style={{float: "left", width: "20%"}}>
                     <h4>Zhihong Deng</h4>
                     <p>s3860863@student.rmit.edu.au <br/> Front-End and Back-End Developer </p>
@@ -74,6 +64,7 @@ const ContactUs = () => {
                     <p>s3845938@student.rmit.edu.au <br/> Front-End and Back-End Developer </p>
                 </div>
             </div>
+            <br/><br/><br/><br/>
         </div>
     );
 }
