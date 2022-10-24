@@ -21,19 +21,17 @@ public class LoadDataController {
         return this.fileName;
     }
 
+    // returns data summary
     // link: http://localhost:8081/api/load-data/getDataSummary
     @GetMapping("/getDataSummary")
     public List<String> getDataSummary(String fileName){
         String name = fileName.toString();
-        List<String> summary = loadDataService.createSummaryString(name);
-        return summary;
+        return loadDataService.createSummaryString(name);
     }
 
-    /**
-     * Method to upload file
-     * @param file
-     * link: http://localhost:8081/api/load-data/uploadFile
-     */
+
+    // Method to upload file
+    // link: http://localhost:8081/api/load-data/uploadFile
     @PostMapping("/uploadFile")
     public void uploadFile(@RequestParam("file") MultipartFile file) {
         boolean uploadCheck = loadDataService.uploadFile(file);

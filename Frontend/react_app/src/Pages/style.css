@@ -1,10 +1,9 @@
-
 * {
     margin: 0px;
     padding: 0px;
 }
 
-.grid-container-zzz {
+.grid-container {
     margin: 0;
 }
 
@@ -65,14 +64,6 @@
     margin-bottom: 0;
 }
 
-/*.data-summary {*/
-/*    text-align: left;*/
-/*    margin-left: 36em;*/
-/*    line-height: 1.2;*/
-/*    word-spacing: 0.1em;*/
-/*}*/
-
-/* FOR CLASSIFY */
 .data-summary {
     text-align: left;
     margin-left: 36em;
@@ -87,21 +78,19 @@
 }
 
 .footer {
-    /*position: fixed;*/
-    /* left: 0; */
     bottom: 0;
     width: 100%;
     grid-area: footer;
     background: rgb(55, 41, 185);
-    margin-top: 7.3em;
+    margin-top: 6em;
     margin-bottom: 0;
+    height: 6em;
 }
 
 footer li {
     display: inline-block;
-    padding: 1em 0.5em;
-    padding-left: 2em;
-    margin: 0.5em;
+    padding: 1em 0.5em 1em 2em;
+    margin-top: 1.5em;
 }
 
 footer li a {
@@ -117,7 +106,6 @@ footer li a:hover {
 
 .right-nav nav {
     background: rgb(55, 41, 185);
-    /* box-shadow: -1em; */
     margin-top: 0;
     margin-bottom: 0;
     text-align: left;
@@ -130,22 +118,14 @@ footer li a:hover {
 
 .right-nav nav li {
     display: inline-block;
-    /*border: solid rgb(100, 0, 171);*/
-    /* top & bottom, left & right paddings */
     padding: 0.5em 1em;
-    /*background-color: rgb(237, 237, 237);*/
-    /* top & bottom, left & right margins around elements */
     margin: 1.4em 1em;
-    /* bottom and left shadows */
-    /*box-shadow: grey -0.1em 0.1em;*/
-    /*transition: 1 sec;*/
 }
 
 .right-nav nav li a {
     text-decoration: none;
     color: white;
     font-family: Helvetica;
-    /*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;*/
 }
 
 .right-nav nav li a:hover {
@@ -210,9 +190,7 @@ footer li a:hover {
 }
 
 .data-table table {
-    /*padding: 4em;*/
     background: rgba(197, 193, 237, 0.917);
-    /* border-color: #15161c; */
 }
 
 .data-table table, th, td {
@@ -221,7 +199,6 @@ footer li a:hover {
     text-align: center;
     border-radius: 0.5em;
 }
-
 
 .weka-intro {
     position: absolute;
@@ -256,6 +233,7 @@ footer li a:hover {
     align-items: center;
     background: #060c21;
 }
+
 .box:before {
     content: '';
     position: absolute;
@@ -267,6 +245,7 @@ footer li a:hover {
     z-index:-1;
 
 }
+
 .box:after {
     content: '';
     position: absolute;
@@ -279,10 +258,12 @@ footer li a:hover {
     filter:blur(40px);
 
 }
+
 .box:before,
 .box:after{
     background: linear-gradient(235deg,#89ff00,#060c21,#00bcd4);
 }
+
 .content{
     padding-right: 20px;
     padding-left: 20px;
@@ -313,6 +294,7 @@ footer li a:hover {
     align-items: center;
     background: #060c21;
 }
+
 .box2:before {
     content: '';
     position: absolute;
@@ -324,6 +306,7 @@ footer li a:hover {
     z-index:-1;
 
 }
+
 .box2:after {
     content: '';
     position: absolute;
@@ -336,6 +319,7 @@ footer li a:hover {
     filter:blur(40px);
 
 }
+
 .box2:before,
 .box2:after{
     background: linear-gradient(235deg,#e37bb2,#060c21,#a70dc6);
@@ -352,6 +336,7 @@ footer li a:hover {
     align-items: center;
     background: #060c21;
 }
+
 .box3:before {
     content: '';
     position: absolute;
@@ -361,8 +346,8 @@ footer li a:hover {
     bottom: -2px;
     background: #fff;
     z-index:-1;
-
 }
+
 .box3:after {
     content: '';
     position: absolute;
@@ -373,8 +358,8 @@ footer li a:hover {
     background: #fff;
     z-index:-1;
     filter:blur(40px);
-
 }
+
 .box3:before,
 .box3:after{
     background: linear-gradient(235deg,#89ff00,#060c21,#00bcd4);
@@ -388,5 +373,3 @@ footer li a:hover {
     justify-content: center;
     font-family: Acanthus;
 }
-
-

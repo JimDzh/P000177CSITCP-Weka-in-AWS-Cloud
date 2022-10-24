@@ -6,16 +6,22 @@ import './classify-style.css';
 import axios from "axios";
 
 
-// Classify component
+// Classify page component
 const Classify = () => {
-
+    // state that stores the data summary
     const [content, setContent] = useState(null);
+    // state that stores the algorithm selected for classifying
     const [algorithm, setAlgorithm] = useState(null);
+    // state that stores the split percentage
     const [percentage, setPercentage] = useState("");
+    // state that stores the type of target attribute
     const [nominal, setNominal] = useState(null);
+    // state that stores the confusion matrix
     const [confMatrix, setConfMatrix] = useState(null);
+    // state that stores the details table
     const [detailsTable, setDetailsTable] = useState(null);
 
+    // form submit handler
     const submitHandler = (event) => {
         event.preventDefault();
         setContent(null);
@@ -27,14 +33,13 @@ const Classify = () => {
                 setContent(summary);
                 details();
             })
-
         event.target['algorithm'].value = "";
         event.target['type'].value = "";
-        // console.log(event.target['algorithm'].value);
         setAlgorithm("");
         setPercentage("");
     }
 
+    // fetching 'details' part of the result and formatting it
     const details = () => {
         let link = "http://localhost:8082/api/classify/getDetails";
         let details = null;
@@ -67,6 +72,7 @@ const Classify = () => {
             })
     }
 
+    // fetching the resultant confusion matrix and formatting it
     const matrix = () => {
         let link = "http://localhost:8082/api/classify/getConfusionMatrix";
         let matrix = null;
@@ -121,9 +127,7 @@ const Classify = () => {
                             </Form.Select>
                         ):(
                             <Form.Select name="algorithm" onChange={event => setAlgorithm(event.target.value)}>
-                                <option>Select an algorithm for classification</option>
-                                {/* used for nominal target variables */}
-                                <option value="LinearRegression">Linear Regression</option>
+                                <option>No options available</option>
                             </Form.Select>
                         )}
                     </Form.Group>

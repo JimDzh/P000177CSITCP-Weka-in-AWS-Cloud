@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import video from '../Videos/weka_video.mp4';
 import './style.css';
-// import {useCookies} from "react-cookie";
 
 // Home component
 const Home = () => {
@@ -10,53 +9,13 @@ const Home = () => {
     const [file, setFile] = useState('');
     const [fileName, setFileName] = useState("");
     const [content, setContent] = useState(null);
-    // const [name, setName] = useState(getFileName('content', null));
-
-    //base end point url
-    const FILE_UPLOAD_BASE_ENDPOINT = "http://localhost:8081/api/load-data/";
-
-    // useEffect(()=>{
-    //     if(content !== null) {
-    //         setCookie('name', fileName, {path: '/'});
-    //     }
-    //     // console.log("name: ", cookies.name)
-    //     // if(cookies.name !== "") {
-    //     //     pageData();
-    //     // }
-    // },[content])
-
-    // useEffect(()=>{
-    //     // console.log(getFileName('name', false));
-    //     // const stored = sessionStorage.getItem('content');
-    //     // if(stored) {
-    //     //     console.log(JSON.parse(stored).props[0]);
-    //     // }
-    //     let content = getFileName('content', false);
-    //     if(content) {
-    //         console.log(content);
-    //     }
-    // },[]);
-    //
-    // useEffect(()=>{
-    //     // sessionStorage.setItem('name', JSON.stringify(name));
-    //     sessionStorage.setItem('content', JSON.stringify(content));
-    // },[content]);
-
-    // function getFileName(key, defaultValue) {
-    //     const stored = sessionStorage.getItem(key);
-    //     if (!stored) {
-    //         return defaultValue;
-    //     }
-    //     return JSON.parse(stored);
-    // }
 
     const uploadFileHandler = (event) => {
         setFile(event.target.files[0]);
         setFileName(event.target.files[0].name);
-        // setCookie('name', fileName, {path: '/'});
-        // setName(event.target.files[0].name);
     };
 
+    // upload the file
     const fileSubmitHandler = (event) => {
         event.preventDefault();
         setContent(null);
@@ -68,6 +27,7 @@ const Home = () => {
             body: formData
         };
 
+        // send the filename to the classify microservice
         let link = "http://localhost:8082/api/classify/setFilename?fileName=" + fileName;
         axios.post(link).then(
             r => {
@@ -75,6 +35,7 @@ const Home = () => {
             }
         );
 
+        // send the filename to the cluster microservice
         link = "http://localhost:8084/api/cluster/setFilename?fileName=" + fileName;
         axios.post(link).then(
             r => {
@@ -82,6 +43,7 @@ const Home = () => {
             }
         );
 
+        // send the filename to the filter microservice
         link = "http://localhost:8083/api/filter/setFilename?fileName=" + fileName;
         axios.post(link).then(
             r => {
@@ -89,9 +51,8 @@ const Home = () => {
             }
         );
 
-        // setCookie('name', fileName, {path: '/'});
-
-        // axios.post("http://localhost:8081/api/load-data/uploadFile", selectedFile);
+        // upload the file to load-data microservice
+        let FILE_UPLOAD_BASE_ENDPOINT = "http://localhost:8081/api/load-data/";
         fetch(FILE_UPLOAD_BASE_ENDPOINT + 'uploadFile', requestOptions)
             .then(r  => {
                 if(r.ok) {
@@ -100,23 +61,21 @@ const Home = () => {
             });
     };
 
-
+    // creating the data summary table
     const pageData = () => {
+        // fetching data summary
         let link = "http://localhost:8081/api/load-data/getDataSummary?fileName=" + fileName;
-        // console.log("Link: " + link);
-        let summ = null;
+        let summary = null;
         axios.get(link)
             .then(res => {
-                summ = res.data;
-                // console.log(summ);
-                let rows = Array.prototype.slice.call(summ);
+                summary = res.data;
+                let rows = Array.prototype.slice.call(summary);
                 let final = [];
                 let header = ["ID", "AttributeName", "Type", "Nominal", "Integer", "Real", "MissingValues", "UniqueValues", "DistinctValues"];
                 let info = [];
                 for(let i=0; i < rows.length;i++) {
                     if (i > 4) {
                         let data = rows[i];
-                        // console.log(data)
                         let data_array = data.split(" ");
                         for(let j=0; j < data_array.length;j++) {
                             if(data_array[j] === "" || data_array[j] === " ") {
@@ -173,7 +132,7 @@ const Home = () => {
 
 
     return (
-          <div className="grid-container-zzz">
+          <div className="grid-container">
               <section className="video-sect">
                   <div className="video-content">
                       <h1 id="text" style={{fontSize: "40px"}}><b>WEKA IS NOW IN CLOUD</b></h1>
@@ -182,7 +141,6 @@ const Home = () => {
                       <video autoPlay muted loop id="video">
                           <source src={video}
                                   type="video/mp4" />
-                          {/*alt text*/}
                           The web browser cannot support mp4
                       </video>
                   </div>
@@ -205,13 +163,9 @@ const Home = () => {
                           {content}
                       </div>
                   ):null}
-                  {/*{cookies.name ? (*/}
-                  {/*    <h3><br/><br/><b>You can now check your data summary in the 'Visualise' page</b></h3>*/}
-                  {/*) : null}*/}
               </section>
           </div>
     );
-
 }
 
 export default Home;

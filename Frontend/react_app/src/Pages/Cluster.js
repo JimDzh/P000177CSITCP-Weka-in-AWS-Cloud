@@ -3,12 +3,16 @@ import axios from "axios";
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
+// Cluster page component
 const Cluster = () => {
-
+    // state that stores data summary
     const [content, setContent] = useState(null);
+    // state that stores the algorithm selected for clustering
     const [algorithm, setAlgorithm] = useState(null);
+    // state that stores the split percentage
     const [percentage, setPercentage] = useState("");
 
+    // form submit handler
     const submitHandler = (event) => {
         event.preventDefault();
         setContent(null);
@@ -19,7 +23,6 @@ const Cluster = () => {
                 summary = res.data;
                 setContent(summary);
             })
-
         event.target['algorithm'].value = "";
         setAlgorithm("");
         setPercentage("");
@@ -35,8 +38,6 @@ const Cluster = () => {
                             <option value="">Select an algorithm for clustering</option>
                             <option value="SimpleKmeans">Simple KMeans</option>
                             <option value="EM">Expectation Maximization (EM)</option>
-                            <option value="Cobweb">Cobweb</option>
-                            <option value="Canopy">Canopy</option>
                         </Form.Select>
                     </Form.Group>
                     <br/>
@@ -58,8 +59,7 @@ const Cluster = () => {
                 {content ? (
                     <div className="cluster-summary">
                         <div dangerouslySetInnerHTML={{ __html: content }}/>
-                        {/*<br/><br/>*/}
-                    </div>
+\                    </div>
                 ): (
                     <div className="cluster-content"></div>
                 )}
