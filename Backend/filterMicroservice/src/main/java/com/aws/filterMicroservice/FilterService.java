@@ -20,7 +20,7 @@ public class FilterService {
 //    private String newFilePath;
     private String filePath;
 
-    // Remove selected attribute based on user input
+    // Remove selected attribute based on user input of the index
     public List<String> removeAttribute (String input) {
         Instances newData;
         try {
@@ -60,7 +60,7 @@ public class FilterService {
     public List<String> replaceMissingWithConstant (String input, String type) {
 
         try {
-            //create NonSparseToSparse object to save in sparse ARFF format
+            //calling ReplaceMissingWithUserConstant Class
             ReplaceMissingWithUserConstant sp = new ReplaceMissingWithUserConstant();
             //specify the dataset
             Instances dataset = loadDataSet(this.filePath);
@@ -98,7 +98,7 @@ public class FilterService {
     public List<String> replaceMissingValueMean () {
 
         try {
-            //create NonSparseToSparse object to save in sparse ARFF format
+            //Calling replacemissingvalues class
             ReplaceMissingValues sp = new ReplaceMissingValues();
             //specify the dataset
             Instances dataset = loadDataSet(this.filePath);
@@ -117,7 +117,7 @@ public class FilterService {
         return null;
     }
 
-
+    //Function to get attributes
     public List<String> getAttributes(String type) {
         Instances dataset = loadDataSet(this.filePath);
         List<String> attributes = new ArrayList<>();
@@ -137,6 +137,7 @@ public class FilterService {
         return attributes;
     }
 
+    //function to get attributes with missing data
     public List<String> getAttributesWithMissingValues(String type) {
         Instances dataset = loadDataSet(this.filePath);
         List<String> attributes = new ArrayList<>();
@@ -155,6 +156,7 @@ public class FilterService {
         return attributes;
     }
 
+    //function to get attribute values
     public List<String> getAttributeValues(String attributeName) {
         Instances dataset = loadDataSet(this.filePath);
         List<String> attributeVals = new ArrayList<>();
