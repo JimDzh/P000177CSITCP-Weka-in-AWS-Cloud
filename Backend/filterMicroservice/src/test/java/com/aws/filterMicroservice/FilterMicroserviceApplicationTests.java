@@ -42,6 +42,7 @@ class FilterMicroserviceApplicationTests {
 	 */
 	@Test
 	void removeAttribute_CorrectList_IfEmpty() {
+		// Please remember to change the path to the dataset to your own path before testing
 		filterService.setFilePath("/Users/jim/Desktop/test pp1 final/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/forFilterTest1.arff");
 		List<String> list1 = new ArrayList<>();
 		list1 = filterService.removeAttribute("age");
@@ -69,6 +70,7 @@ class FilterMicroserviceApplicationTests {
 	 */
 	@Test
 	void replaceMissingWithConstantNumeric_CorrectList_IfSameAsTheCorrectSample() {
+		// Please remember to change the path to the dataset to your own path before testing
 		filterService.setFilePath("/Users/jim/Desktop/test pp1 final/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/forFilterTest2.arff");
 		List<String> list1 = new ArrayList<>();
 		list1 = filterService.replaceMissingWithConstant("0","numeric");
@@ -94,6 +96,7 @@ class FilterMicroserviceApplicationTests {
 	 */
 	@Test
 	void replaceMissingValueMean_CorrectList_IfSameAsTheCorrectSample() {
+		// Please remember to change the path to the dataset to your own path before testing
 		filterService.setFilePath("/Users/jim/Desktop/test pp1 final/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/forFilterTest3.arff");
 		List<String> list1 = new ArrayList<>();
 		list1 = filterService.replaceMissingValueMean();
