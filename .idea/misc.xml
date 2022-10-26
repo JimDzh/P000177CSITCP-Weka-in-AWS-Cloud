@@ -3,11 +3,10 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/weka/pom.xml" />
-        <option value="$PROJECT_DIR$/Backend/loadDataMicroservice/pom.xml" />
-        <option value="$PROJECT_DIR$/Backend/clusterMicroservice/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/classifyMicroservice/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/clusterMicroservice/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/filterMicroservice/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/loadDataMicroservice/pom.xml" />
       </list>
     </option>
   </component>

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -17,181 +19,138 @@ class ClusterMicroserviceApplicationTests {
 
 	@BeforeAll
 	public static void initialise() { // initialise the controller and service
-		clusterController = new ClusterController(); // for test the
-		// controller class's methods
-		clusterController.initialiseClusterServiceAttribute();
-		// initialise the service attribute in the controller class
-		clusterService = new ClusterService();// for directly test the
-//		// service class
+//		clusterController = new ClusterController(); // for test the
+//		// controller class's methods
+//		clusterController.initialiseClusterServiceAttribute();
+//		// initialise the service attribute in the controller class
+//		clusterService = new ClusterService();// for directly test the
+////		// service class
+		clusterService = new ClusterService();
 	}
 
 	@AfterEach
 	public void reset() {
-		// Reset file name
-		clusterController.setFileName("");
+
 
 	}
 
-	// test the controller class's methods
-	@Test
-	void getFileName_UploadedFileName() {
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals(fileName, clusterController.getFileName());
-	}
 
-	@Test
-	void getFileName_null_IfSetFileNameNotInvoked() {
-		assert clusterController.getFileName() == "";
-	}
+
 
 
 	// SimpleKmeans
-
+	//Get the Summary when SimpleKmeans invoked, Check if the summary is not a Null result.
 	@Test
-	void getDataSummary_SimpleKmeansSummary_IfSimpleKmeansInvoked() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
+	void SimpleKmeansClusterer_SimpleKmeansSummary_IfSimpleKmeansClustererInvoked() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.SimpleKmeansClusterer(filepath, "80");
+		System.out.println(summary);
+		assert summary != null;
+	}
 
-		clusterController.getClusterService().SimpleKmeansClusterer("../../Datasets/segment-challenge.arff", "80");
-		assertThat(clusterController.getSummary("SimpleKmeans","80"),CoreMatchers.containsString("80"));
+	//Get the Summary when SimpleKmeans is invoked with a wrong range that "101", Check if the summary will throw the right exception.
+	@Test
+	void SimpleKmeansClusterer_ErrorMessage_IfSimpleKmeansClustererInvokedWithWrongPercentageRange() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.SimpleKmeansClusterer(filepath, "101");
+		System.out.println(summary);
+		assertEquals("Input should not be empty and percentage must be a number" +
+				" between 0 and 100", summary);
 
 	}
 
+	//Get the Summary when SimpleKmeans is invoked with a wrong range that "-1", Check if the summary will throw the right exception.
 	@Test
-	void getDataSummary_EmptyString_IfSimpleKmeansNotInvoked() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("", clusterController.getSummary("notExist", "70"));
-	}
-
-	@Test
-	void getDataSummary_ErrorMessage_IfSimpleKmeansWithWrongPercentageRange() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("SimpleKmeans", "101"));
-	}
-
-
-	@Test
-	void getDataSummary_ErrorMessage_IfSimpleKmeansWithWrongPercentageRangeNegative() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("SimpleKmeans", "-1"));
-	}
-
-	@Test
-	void getDataSummary_ErrorMessage_IfSimpleKmeansWithWrongPercentageRangeZero() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("SimpleKmeans", "0"));
-	}
-
-	@Test
-	void getDataSummary_ErrorMessage_IfSimpleKmeansWithWrongPercentageRange100() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("SimpleKmeans", "100"));
-	}
-
-	@Test
-	void getDataSummary_ErrorMessage_IfSimpleKmeansWithEmptyPercentage() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("SimpleKmeans", ""));
-	}
-
-	@Test
-	void getDataSummary_ErrorMessage_IfSimpleKmeansWithCharacterPercentage() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("SimpleKmeans", "lol"));
-	}
-
-	// ---EM
-
-	@Test
-	void getDataSummary_EMSummary_IfEMInvoked() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-
-		clusterController.getClusterService().SimpleKmeansClusterer("../../Datasets/segment-challenge.arff", "80");
-		assertThat(clusterController.getSummary("EM","80"),CoreMatchers.containsString("80"));
+	void SimpleKmeansClusterer_ErrorMessage_IfSimpleKmeansClustererInvokedWithWrongPercentageRangeNegative() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.SimpleKmeansClusterer(filepath, "-1");
+		System.out.println(summary);
+		assertEquals("Input should not be empty and percentage must be a number" +
+				" between 0 and 100", summary);
 
 	}
 
+	//Get the Summary when SimpleKmeans is invoked with a wrong range that "0", Check if the summary will throw the right exception.
 	@Test
-	void getDataSummary_EmptyString_IfEMInvoked() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("", clusterController.getSummary("notExist", "70"));
+	void SimpleKmeansClusterer_ErrorMessage_IfSimpleKmeansClustererInvokedWithWrongPercentageRangeZero() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.SimpleKmeansClusterer(filepath, "0");
+		System.out.println(summary);
+		assertEquals("Input should not be empty and percentage must be a number" +
+				" between 0 and 100", summary);
+
 	}
 
+
+	//Get the Summary when SimpleKmeans is invoked with an empty range that "", Check if the summary will throw the right exception.
 	@Test
-	void getDataSummary_ErrorMessage_IfEMInvokedWithWrongPercentageRange() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("EM", "101"));
+	void SimpleKmeansClusterer_ErrorMessage_IfSimpleKmeansClustererInvokedWithEmptyPercentageRange() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.SimpleKmeansClusterer(filepath, "");
+		System.out.println(summary);
+		assertEquals("Input should not be empty and percentage must be a number" +
+				" between 0 and 100", summary);
+
 	}
 
+
+
+	//EMClusterer
+	//Get the Summary when EMClusterer is invoked, Check if the summary is not a Null result.
 	@Test
-	void getDataSummary_ErrorMessage_IfEMInvokedWithWrongPercentageRangeNegative() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("EM", "-1"));
+	void EMClusterer_EMClustererSummary_IfEMClustererInvoked() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.EMClusterer(filepath, "80");
+		System.out.println(summary);
+		assert summary != null;
+
 	}
 
+	//Get the Summary when EMClusterer is invoked with a wrong range that "101", Check if the summary will throw the right exception.
 	@Test
-	void getDataSummary_ErrorMessage_IfEMInvokedWithWrongPercentageRangeZero() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("EM", "0"));
+	void EMClusterer_ErrorMessage_IfEMClustererInvokedWithWrongPercentageRange() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.EMClusterer(filepath, "101");
+		System.out.println(summary);
+		assertEquals("Input should not be empty and percentage must be a number" +
+				" between 0 and 100", summary);
+
 	}
 
+	//Get the Summary when EMClusterer is invoked with a wrong range that "-1", Check if the summary will throw the right exception.
 	@Test
-	void getDataSummary_ErrorMessage_IfEMInvokedWithWrongPercentageRange100() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("EM", "100"));
+	void EMClusterer_ErrorMessage_IfEMClustererInvokedWithWrongPercentageRangeNegative() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.EMClusterer(filepath, "-1");
+		System.out.println(summary);
+		assertEquals("Input should not be empty and percentage must be a number" +
+				" between 0 and 100", summary);
+
 	}
 
+	//Get the Summary when EMClusterer is invoked with a wrong range that "0", Check if the summary will throw the right exception.
 	@Test
-	void getDataSummary_ErrorMessage_IfEMInvokedWithEmptyPercentage() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("EM", ""));
+	void EMClusterer_ErrorMessage_IfEMClustererInvokedWithWrongPercentageRangeZero() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.EMClusterer(filepath, "0");
+		System.out.println(summary);
+		assertEquals("Input should not be empty and percentage must be a number" +
+				" between 0 and 100", summary);
+
 	}
 
+	//Get the Summary when EMClusterer is invoked with an empty range that "", Check if the summary will throw the right exception.
 	@Test
-	void getDataSummary_ErrorMessage_IfEMInvokedWithCharacterPercentage() throws Exception{
-		String fileName = "segment-challenge.arff";
-		clusterController.setFileName(fileName);
-		assertEquals("Input should not be empty and percentage must be a " +
-						"number between 0 and 100",
-				clusterController.getSummary("EM", "lol"));
+	void EMClusterer_ErrorMessage_IfEMClustererInvokedWithEmptyPercentageRange() throws Exception{
+		String filepath = "/Users/zehuliu/Downloads/P000177CSITCP-Weka-in-AWS-Cloud/Datasets/segment-challenge.arff";
+		String summary = clusterService.EMClusterer(filepath, "");
+		System.out.println(summary);
+		assertEquals("Input should not be empty and percentage must be a number" +
+				" between 0 and 100", summary);
+
 	}
+
+
 
 
 }
