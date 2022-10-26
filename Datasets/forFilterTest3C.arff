@@ -1,0 +1,10 @@
+@relation cleveland-14-heart-disease-weka.filters.unsupervised.attribute.Remove-R1
+
+@attribute chol numeric
+
+@data
+1
+2.5
+4
+4
+1

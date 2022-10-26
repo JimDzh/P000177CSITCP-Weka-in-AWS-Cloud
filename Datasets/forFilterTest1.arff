@@ -1,0 +1,10 @@
+@relation 'cleveland-14-heart-disease'
+
+@attribute age numeric
+@attribute sex {female,male}
+@attribute cp {typ_angina,asympt,non_anginal,atyp_angina}
+
+@data
+0.956727,male,typ_angina
+1.397845,male,asympt
+1.397845,male,asympt
