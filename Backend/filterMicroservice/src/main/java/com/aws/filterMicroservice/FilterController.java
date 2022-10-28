@@ -12,27 +12,24 @@ public class FilterController {
 
     @Autowired
     private FilterService filterService;
-//    private String filePath;
 
     // link: http://localhost:8083/api/filter/setFilename
     @PostMapping("/setFilename")
     public void setFileName(String fileName) {
         String fn = fileName;
-//        this.filePath = "./Datasets/"+ fn;
+        // replace './Datasets/' with your own path to Datasets folder
         filterService.setFilePath("./Datasets/"+ fn);
     }
 
     // link: http://localhost:8083/api/filter/removeAttribute
     @PostMapping("/removeAttribute")
     public List<String> removeAttribute(String attribute) {
-//        System.out.println(attribute);
         return filterService.removeAttribute(attribute);
     }
 
     // link: http://localhost:8083/api/filter/replaceMissing-constant
     @PostMapping("/replaceMissing-constant")
     public List<String> replaceMissingWithConstant(String constant, String type) {
-//        System.out.println(type);
         return filterService.replaceMissingWithConstant(constant, type);
     }
 

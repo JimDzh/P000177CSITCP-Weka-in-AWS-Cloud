@@ -17,7 +17,6 @@ import java.util.*;
 @Service
 public class FilterService {
 
-//    private String newFilePath;
     private String filePath;
 
     // Remove selected attribute based on user input
@@ -231,11 +230,5 @@ public class FilterService {
             return false;
         }
     }
-
-//    private String getAttributeType(Instances instances, String attributeName) {
-//        Attribute attribute = instances.attribute(attributeName);
-//        String attributeType = attribute.typeToString(attribute);
-//        return attributeType;
-//    }
 
 }

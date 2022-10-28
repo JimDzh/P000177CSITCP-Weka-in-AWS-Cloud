@@ -22,6 +22,7 @@ public class ClassifyController {
     @PostMapping("/setFilename")
     public void setFileName(String fileName) {
         this.fileName = fileName;
+        // replace './Datasets/' with your own path to Datasets folder
         classifyService.setFilePath("./Datasets/" + fileName);
     }
 

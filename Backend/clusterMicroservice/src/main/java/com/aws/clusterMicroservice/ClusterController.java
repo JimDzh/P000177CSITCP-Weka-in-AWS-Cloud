@@ -26,6 +26,7 @@ public class ClusterController {
         String summary = "";
         try {
             switch (algorithm) {
+                // replace './Datasets/' with your own path to Datasets folder
                 case "SimpleKmeans":
                     summary = clusterService.SimpleKmeansClusterer("./Datasets/"+ this.fileName, percentage);
                     break;
