@@ -7,7 +7,7 @@ Except our version of WEKA is a website you can use on any browser.
 
 ### Our team
 * **Sai Sreshtaa Turaga** - Frontend and Backend Developer - sreshtaa.t@gmail.com
-* **Yitao Ma** - Backend Developer and Tester 
+* **Yitao Ma** - Backend Developer and Tester - ethanyitaoma2001@gmail.com
 * **Zhihong Deng** - Frontend and Backend Developer, Tester 
 * **Zehu Liu** - Backend Developer and Tester 
 * **Christoper Adrianus Sindarto** - Frontend and Backend Developer 
