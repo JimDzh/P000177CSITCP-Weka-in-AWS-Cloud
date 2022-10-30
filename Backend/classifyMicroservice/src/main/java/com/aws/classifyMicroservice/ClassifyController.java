@@ -30,9 +30,7 @@ public class ClassifyController {
     // link: http://localhost:8082/api/classify/getDataSummary
     @GetMapping("/getDataSummary")
     public String getDataSummary(String algorithm, String percentage) {
-
         String summary = "";
-
         try {
             switch (algorithm) {
                 case "NaiveBayes":

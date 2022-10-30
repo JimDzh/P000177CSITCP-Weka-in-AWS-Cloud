@@ -3,9 +3,11 @@
     padding: 0px;
 }
 
+
 .grid-container {
     margin: 0;
 }
+
 
 .rmit-logo {
     height: 3em;
@@ -372,4 +374,9 @@ footer li a:hover {
     min-height:30vh;
     justify-content: center;
     font-family: Acanthus;
+}
+
+.about-weka span {
+    margin-top: 0em;
+    width: 85%;
 }

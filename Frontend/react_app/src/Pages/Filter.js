@@ -263,9 +263,11 @@ const Filter = () => {
                     <br/>
 
                     {/* DISPLAYING FURTHER OPTIONS DEPENDING ON THE FILTER SELECTED */}
+                    {/* If option selected was "Remove an attribute" */}
                     {remove ? (
                         removeOptions
                     ): null}
+                    {/* If option selected was "Replace all missing values with a constant" */}
                     {replaceConstant ? (
                         <div>
                             <Form.Group>
