@@ -13,11 +13,15 @@ Except our version of WEKA is a website you can use on any browser.
 * **Christoper Adrianus Sindarto** - Frontend and Backend Developer 
 
 ### Instructions to run this application:
-1. Make sure you are inside the project folder (P000177CSITCP-Weka-in-AWS-Cloud) in your terminal/command line 
-2. Enter this command: cd Frontend/react_app/
-3. Now run: npm install
-4. Try running: npm start
-5. If you face any errors after you perform Step 4, run the command "npm list", 
+1. Inside every microservice folder in the Backend folder (classifyMicroservice, clusterMicroservice, filterMicroservice, loadDataMicroservice),
+   follow these steps:
+   1. right click on the 'pom.xml' file
+   2. click on 'add as maven project'
+2. Make sure you are inside the project folder (P000177CSITCP-Weka-in-AWS-Cloud) in your terminal/command line 
+3. Enter this command: cd Frontend/react_app/
+4. Now run: npm install
+5. Try running: npm start
+6. If you face any errors after you perform Step 4, run the command "npm list", 
 and check the following packages are present inside the output list 
 (If these are not present, install them while you are still inside the 'Frontend/react_app/' folder):
    1. bootstrap@5.2.1
@@ -28,18 +32,18 @@ and check the following packages are present inside the output list
    6. react@18.2.0
    7. axios@0.27.2
    8. web-vitals@2.1.4
-6. After running 'npm start', the website should automatically open in your browser.
-7. Now you will need to change the paths present in the following classes inside the 'Backend' folder, 
+7. After running 'npm start', the website should automatically open in your browser.
+8. Now you will need to change the paths present in the following classes inside the 'Backend' folder, 
 to your own absolute paths (Further instructions on how to do this have been provided as comments in the files):
    1. Line 26 inside ClassifyController.java
    2. Lines 30, 33 inside ClusterController.java
    3. Line 21 inside FilterController.java
    4. Lines 26, 59, 65, 84 inside LoadDataService.java
-8. Run the following classes inside the backend folder:
+9. Run the following classes inside the backend folder:
    1. ClassifyMicroserviceApplication.java
    2. ClusterMicroserviceApplication.java
    3. FilterMicroserviceApplication.java
    4. LoadDataMicroserviceApplication.java
-9. Now the website should function as expected. Enjoy!
+10. Now the website should function as expected. Enjoy!
 
 ### All tests are present inside the 'final-tests' branch
