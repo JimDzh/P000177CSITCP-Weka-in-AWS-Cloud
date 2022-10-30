@@ -41,3 +41,5 @@ to your own absolute paths (Further instructions on how to do this have been pro
    3. FilterMicroserviceApplication.java
    4. LoadDataMicroserviceApplication.java
 9. Now the website should function as expected. Enjoy!
+
+### All tests are present inside the 'final-tests' branch

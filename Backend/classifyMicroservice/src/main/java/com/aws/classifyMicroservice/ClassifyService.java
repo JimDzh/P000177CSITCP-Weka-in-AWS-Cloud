@@ -114,10 +114,12 @@ public class ClassifyService {
         this.filePath = filePath;
     }
 
+    // Actual testing is not here, please go to final-test branch, not in this react branch
     public void setMatrix(List<List<String>> matrix) { // Actual testing is not here, please go to final-test branch, not in this react branch
         this.matrix = matrix;
     }
 
+    // Actual testing is not here, please go to final-test branch, not in this react branch
     public void setDetails(List<List<String>> details) { // Actual testing is not here, please go to final-test branch, not in this react branch
         this.details = details;
     }
